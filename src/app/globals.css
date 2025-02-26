@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-white: 255, 255, 255;
+  --c-black: #101214;
+  --c-black-rgb: 16, 18, 20;
+  --c-berry: #c8c2cf;
+  --c-berry-rgb: 200, 194, 207;
+  --c-purple: #a399a8;
+  --c-purple-rgb: 163, 153, 168;
+  --c-grey: #e6dfe4;
+  --c-grey-rgb: 230, 223, 228;
+  --c-grey-dark: #060606;
+  --c-grey-dark-rgb: 84, 77, 86;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+    font-family: 'Poppins', sans-serif;
+  
+}
