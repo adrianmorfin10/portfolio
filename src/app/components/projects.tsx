@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useInView, useAnimation, useScroll, useTransform } from 'framer-motion';
-import { useRef, useEffect } from 'react';
-import Image from 'next/image'; // Importamos Image de Next.js
+import { motion, useInView, useAnimation } from "framer-motion";
+import { useRef, useEffect } from "react";
+import Image from "next/image";
 
 interface Project {
   id: number;
@@ -11,74 +11,65 @@ interface Project {
   roles?: string[];
   cta?: string;
   media: {
-    video: string; // Ruta del video (obligatorio)
-    images: string[]; // Rutas de las imágenes (de 1 a 10)
+    video: string;
+    images: string[];
   };
 }
 
 const projects: Project[] = [
   {
     id: 1,
-    title: 'Black Pay',
-    description: 'Participé como Product Designer y Product Owner...',
-    roles: ['Product Designer', 'Product Owner'],
-    cta: 'Ver Proyecto',
+    title: "Black Pay",
+    description: "Participé como Product Designer y Product Owner...",
+    roles: ["Product Designer", "Product Owner"],
+    cta: "Ver Proyecto",
     media: {
-      video: '/out.mp4', // Video específico para Black Pay
-      images: [
-        '/img1.png',
-        '/img2.png',
-        '/img3.png',
-        '/img4.png',
-        '/img5.png',
-      ],
+      video: "/out.mp4",
+      images: ["/img1.png", "/img2.png", "/img3.png", "/img4.png", "/img5.png"],
     },
   },
   {
     id: 2,
-    title: 'Agenda',
-    description: 'Creé desde 0 una aplicación para agendamiento...',
-    roles: ['Diseñador UX/UI', 'Desarrollador Frontend'],
+    title: "Agenda",
+    description: "Creé desde 0 una aplicación para agendamiento...",
+    roles: ["Diseñador UX/UI", "Desarrollador Frontend"],
     media: {
-      video: '/out2.mp4', // Video específico para Agenda
-      images: [
-        '/agenda1.png',
-        '/agenda2.png',
-      ],
+      video: "/out2.mp4",
+      images: ["/agenda1.png", "/agenda2.png"],
     },
   },
-  // Agrega más proyectos aquí...
 ];
 
 export default function Projects() {
-  const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1.1]);
+  const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   return (
     <section className="py-20 bg-black text-white">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-10">Proyectos</h2>
 
-        {/* Contenedores para cada proyecto */}
         {projects.map((project, index) => {
-          const projectRef = useRef(null);
-          const projectInView = useInView(projectRef, { margin: "-100px" });
-          const projectControls = useAnimation();
+          const ref = useRef<HTMLDivElement | null>(null);
+          const inView = useInView(ref, { margin: "-100px" });
+          const controls = useAnimation();
 
           useEffect(() => {
-            if (projectInView) {
-              projectControls.start("visible");
+            if (inView) {
+              controls.start("visible");
             } else {
-              projectControls.start("hidden");
+              controls.start("hidden");
             }
-          }, [projectInView, projectControls]);
+          }, [inView, controls]);
 
           return (
             <motion.div
               key={project.id}
-              ref={projectRef}
+              ref={(el) => {
+                ref.current = el;
+                projectRefs.current[index] = el;
+              }}
               initial="hidden"
-              animate={projectControls}
+              animate={controls}
               variants={{
                 visible: { opacity: 1, y: 0, scale: 1 },
                 hidden: { opacity: 0, y: 50, scale: 0.9 },
@@ -86,16 +77,11 @@ export default function Projects() {
               transition={{ duration: 0.6 }}
               className="mb-10 p-6 rounded-3xl bg-grey-dark"
             >
-              {/* Título del proyecto */}
-              <motion.h3
-                className="text-2xl font-bold text-center mb-6 text-berry"
-              >
+              <motion.h3 className="text-2xl font-bold text-center mb-6 text-berry">
                 {project.title}
               </motion.h3>
 
-              {/* Grid Bento para cada proyecto */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {/* Video (rectangular horizontal) */}
                 <motion.div
                   variants={{
                     visible: { opacity: 1, x: 0 },
@@ -113,7 +99,6 @@ export default function Projects() {
                   />
                 </motion.div>
 
-                {/* Descripción del producto (rectangular vertical) */}
                 <motion.div
                   variants={{
                     visible: { opacity: 1, y: 0 },
@@ -125,7 +110,6 @@ export default function Projects() {
                   <p className="text-grey">{project.description}</p>
                 </motion.div>
 
-                {/* Roles (cuadrado) */}
                 <motion.div
                   variants={{
                     visible: { opacity: 1, y: 0 },
@@ -136,13 +120,12 @@ export default function Projects() {
                 >
                   <h4 className="text-lg font-semibold mb-4 text-berry">Roles:</h4>
                   <ul className="list-disc list-inside text-grey">
-                    {project.roles?.map((role, index) => (
-                      <li key={index}>{role}</li>
+                    {project.roles?.map((role, idx) => (
+                      <li key={idx}>{role}</li>
                     ))}
                   </ul>
                 </motion.div>
 
-                {/* Imágenes del proyecto */}
                 {project.media.images.map((image, idx) => (
                   <motion.div
                     key={idx}
@@ -152,15 +135,15 @@ export default function Projects() {
                     }}
                     transition={{ duration: 0.6, delay: 0.8 + idx * 0.2 }}
                     className={`rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-grey-dark ${
-                      idx % 3 === 0 ? 'md:col-span-2' : 'md:col-span-1'
+                      idx % 3 === 0 ? "md:col-span-2" : "md:col-span-1"
                     }`}
                   >
                     <Image
                       src={image}
                       alt={`Imagen ${idx + 1} de ${project.title}`}
                       className="w-full h-64 object-cover"
-                      width={500} // Define el ancho
-                      height={300} // Define la altura
+                      width={500}
+                      height={300}
                     />
                   </motion.div>
                 ))}
