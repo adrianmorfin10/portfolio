@@ -82,7 +82,9 @@ export default function Projects() {
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
-            ref={(el) => (projectRefs.current[index] = el)}
+            ref={(el) => {
+              if (el) projectRefs.current[index] = el; // Asignamos la referencia sin devolver nada
+            }}
             initial="hidden"
             animate={controls}
             variants={{
