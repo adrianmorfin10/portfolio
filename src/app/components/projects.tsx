@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 
@@ -45,6 +45,9 @@ export default function Projects() {
   const controls = useAnimation();
 
   useEffect(() => {
+    // Copiamos projectRefs.current a una variable local
+    const currentRefs = projectRefs.current;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -58,12 +61,14 @@ export default function Projects() {
       { threshold: 0.5 } // Ajusta el threshold según sea necesario
     );
 
-    projectRefs.current.forEach((ref) => {
+    // Observamos cada referencia
+    currentRefs.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
+    // Función de limpieza
     return () => {
-      projectRefs.current.forEach((ref) => {
+      currentRefs.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };
