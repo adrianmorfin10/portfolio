@@ -2,6 +2,7 @@
 
 import { motion, useInView, useAnimation, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect } from 'react';
+import Image from 'next/image'; // Importamos Image de Next.js
 
 interface Project {
   id: number;
@@ -43,33 +44,6 @@ const projects: Project[] = [
       images: [
         '/agenda1.png',
         '/agenda2.png',
-      ],
-    },
-  },
-  {
-    id: 3,
-    title: 'Coinsturn',
-    description: 'En este fui Head of Product y diseñador...',
-    roles: ['Head of Product', 'Diseñador'],
-    media: {
-      video: '/videos/coinsturn.mp4', // Video específico para Coinsturn
-      images: [
-        '/img1.png',
-        '/img2.png',
-        '/img3.png',
-        '/img4.png',
-      ],
-    },
-  },
-  {
-    id: 4,
-    title: 'Sky',
-    description: 'Mejora de ecommerce...',
-    roles: ['Diseñador UX/UI'],
-    media: {
-      video: '/videos/sky.mp4', // Video específico para Sky
-      images: [
-        '/img1.png',
       ],
     },
   },
@@ -181,10 +155,12 @@ export default function Projects() {
                       idx % 3 === 0 ? 'md:col-span-2' : 'md:col-span-1'
                     }`}
                   >
-                    <img
+                    <Image
                       src={image}
                       alt={`Imagen ${idx + 1} de ${project.title}`}
                       className="w-full h-64 object-cover"
+                      width={500} // Define el ancho
+                      height={300} // Define la altura
                     />
                   </motion.div>
                 ))}

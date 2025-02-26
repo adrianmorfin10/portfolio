@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion'; // Importamos Framer Motion
+import { motion } from 'framer-motion';
+import Image from 'next/image'; // Importamos Image de Next.js
 
 export default function Hero() {
   const words = ["Diseño", "Producto", "Programación", "Innovación", "Creatividad"];
@@ -42,7 +43,7 @@ export default function Hero() {
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, currentWordIndex, isDeleting]);
+  }, [displayText, currentWordIndex, isDeleting, words]); // Agregamos `words` aquí
 
   return (
     <section className="relative bg-white overflow-hidden">
@@ -90,10 +91,12 @@ export default function Hero() {
 
           {/* Imagen hero (imghero.png) dentro del contenedor izquierdo */}
           <div className="w-full mt-4 relative hidden sm:block">
-            <img
+            <Image
               src="/imghero.png"
               alt="Imagen Hero"
-              className="w-full h-auto rounded-3xl" // Ajusta el tamaño y redondea las esquinas
+              className="w-full h-auto rounded-3xl"
+              width={500} // Define el ancho
+              height={300} // Define la altura
             />
 
             {/* Rectángulo azul horizontal con hover y backdrop-blur */}
@@ -103,10 +106,12 @@ export default function Hero() {
 
             {/* Flecha hacia abajo más grande (oculta en móviles) */}
             <div className="absolute w-[200px] h-[200px] top-[350px] left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden sm:block">
-              <img
+              <Image
                 src="/flecha.png"
                 alt="Flecha hacia abajo"
-                className="w-full h-full" // Tamaño aumentado 4 veces
+                className="w-full h-full"
+                width={200} // Define el ancho
+                height={200} // Define la altura
               />
             </div>
           </div>
