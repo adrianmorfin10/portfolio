@@ -42,115 +42,124 @@ const projects: Project[] = [
 
 export default function Projects() {
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            controls.start("visible");
+          } else {
+            controls.start("hidden");
+          }
+        });
+      },
+      { threshold: 0.5 } // Ajusta el threshold según sea necesario
+    );
+
+    projectRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      projectRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, [controls]);
 
   return (
     <section className="py-20 bg-black text-white">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-10">Proyectos</h2>
 
-        {projects.map((project, index) => {
-          const ref = useRef<HTMLDivElement | null>(null);
-          const inView = useInView(ref, { margin: "-100px" });
-          const controls = useAnimation();
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.id}
+            ref={(el) => (projectRefs.current[index] = el)}
+            initial="hidden"
+            animate={controls}
+            variants={{
+              visible: { opacity: 1, y: 0, scale: 1 },
+              hidden: { opacity: 0, y: 50, scale: 0.9 },
+            }}
+            transition={{ duration: 0.6 }}
+            className="mb-10 p-6 rounded-3xl bg-grey-dark"
+          >
+            <motion.h3 className="text-2xl font-bold text-center mb-6 text-berry">
+              {project.title}
+            </motion.h3>
 
-          useEffect(() => {
-            if (inView) {
-              controls.start("visible");
-            } else {
-              controls.start("hidden");
-            }
-          }, [inView, controls]);
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <motion.div
+                variants={{
+                  visible: { opacity: 1, x: 0 },
+                  hidden: { opacity: 0, x: -50 },
+                }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="md:col-span-2 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black"
+              >
+                <video
+                  src={project.media.video}
+                  autoPlay
+                  loop
+                  muted
+                  className="w-full h-64 object-cover"
+                />
+              </motion.div>
 
-          return (
-            <motion.div
-              key={project.id}
-              ref={(el) => {
-                ref.current = el;
-                projectRefs.current[index] = el;
-              }}
-              initial="hidden"
-              animate={controls}
-              variants={{
-                visible: { opacity: 1, y: 0, scale: 1 },
-                hidden: { opacity: 0, y: 50, scale: 0.9 },
-              }}
-              transition={{ duration: 0.6 }}
-              className="mb-10 p-6 rounded-3xl bg-grey-dark"
-            >
-              <motion.h3 className="text-2xl font-bold text-center mb-6 text-berry">
-                {project.title}
-              </motion.h3>
+              <motion.div
+                variants={{
+                  visible: { opacity: 1, y: 0 },
+                  hidden: { opacity: 0, y: 50 },
+                }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="md:col-span-2 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black p-6"
+              >
+                <p className="text-grey">{project.description}</p>
+              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <motion.div
+                variants={{
+                  visible: { opacity: 1, y: 0 },
+                  hidden: { opacity: 0, y: 50 },
+                }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black p-6"
+              >
+                <h4 className="text-lg font-semibold mb-4 text-berry">Roles:</h4>
+                <ul className="list-disc list-inside text-grey">
+                  {project.roles?.map((role, idx) => (
+                    <li key={idx}>{role}</li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {project.media.images.map((image, idx) => (
                 <motion.div
+                  key={idx}
                   variants={{
-                    visible: { opacity: 1, x: 0 },
-                    hidden: { opacity: 0, x: -50 },
+                    visible: { opacity: 1, scale: 1 },
+                    hidden: { opacity: 0, scale: 0.9 },
                   }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="md:col-span-2 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black"
+                  transition={{ duration: 0.6, delay: 0.8 + idx * 0.2 }}
+                  className={`rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-grey-dark ${
+                    idx % 3 === 0 ? "md:col-span-2" : "md:col-span-1"
+                  }`}
                 >
-                  <video
-                    src={project.media.video}
-                    autoPlay
-                    loop
-                    muted
+                  <Image
+                    src={image}
+                    alt={`Imagen ${idx + 1} de ${project.title}`}
                     className="w-full h-64 object-cover"
+                    width={500}
+                    height={300}
                   />
                 </motion.div>
-
-                <motion.div
-                  variants={{
-                    visible: { opacity: 1, y: 0 },
-                    hidden: { opacity: 0, y: 50 },
-                  }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="md:col-span-2 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black p-6"
-                >
-                  <p className="text-grey">{project.description}</p>
-                </motion.div>
-
-                <motion.div
-                  variants={{
-                    visible: { opacity: 1, y: 0 },
-                    hidden: { opacity: 0, y: 50 },
-                  }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black p-6"
-                >
-                  <h4 className="text-lg font-semibold mb-4 text-berry">Roles:</h4>
-                  <ul className="list-disc list-inside text-grey">
-                    {project.roles?.map((role, idx) => (
-                      <li key={idx}>{role}</li>
-                    ))}
-                  </ul>
-                </motion.div>
-
-                {project.media.images.map((image, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={{
-                      visible: { opacity: 1, scale: 1 },
-                      hidden: { opacity: 0, scale: 0.9 },
-                    }}
-                    transition={{ duration: 0.6, delay: 0.8 + idx * 0.2 }}
-                    className={`rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-grey-dark ${
-                      idx % 3 === 0 ? "md:col-span-2" : "md:col-span-1"
-                    }`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`Imagen ${idx + 1} de ${project.title}`}
-                      className="w-full h-64 object-cover"
-                      width={500}
-                      height={300}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          );
-        })}
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
