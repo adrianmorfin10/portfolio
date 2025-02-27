@@ -42,7 +42,7 @@ const projects: Project[] = [
 
 export default function Projects() {
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const controlsArray = projects.map(() => useAnimation()); // Un control para cada proyecto
+  const controlsArray = projects.map(() => useAnimation()); // Initialize controls outside the loop
 
   useEffect(() => {
     const currentRefs = projectRefs.current;
