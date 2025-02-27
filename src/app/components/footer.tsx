@@ -91,7 +91,79 @@ export default function Projects() {
             transition={{ duration: 0.6 }}
             className="mb-10 p-6 rounded-3xl bg-grey-dark"
           >
-            {/* Resto del código */}
+            <motion.h3 className="text-2xl font-bold text-center mb-6 text-berry">
+              {project.title}
+            </motion.h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <motion.div
+                variants={{
+                  visible: { opacity: 1, x: 0 },
+                  hidden: { opacity: 0, x: -50 },
+                }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="md:col-span-2 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black hidden md:block"
+              >
+                <video
+                  src={project.media.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls={false}
+                  className="w-full h-64 object-cover"
+                />
+              </motion.div>
+
+              <motion.div
+                variants={{
+                  visible: { opacity: 1, y: 0 },
+                  hidden: { opacity: 0, y: 50 },
+                }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="md:col-span-2 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black p-6"
+              >
+                <p className="text-grey">{project.description}</p>
+              </motion.div>
+
+              <motion.div
+                variants={{
+                  visible: { opacity: 1, y: 0 },
+                  hidden: { opacity: 0, y: 50 },
+                }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black p-6"
+              >
+                <h4 className="text-lg font-semibold mb-4 text-berry">Roles:</h4>
+                <ul className="list-disc list-inside text-grey">
+                  {project.roles?.map((role, idx) => (
+                    <li key={idx}>{role}</li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {project.media.images.map((image, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={{
+                    visible: { opacity: 1, scale: 1 },
+                    hidden: { opacity: 0, scale: 0.9 },
+                  }}
+                  transition={{ duration: 0.6, delay: 0.8 + idx * 0.2 }}
+                  className={`rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-grey-dark ${
+                    idx % 3 === 0 ? "md:col-span-2" : "md:col-span-1"
+                  }`}
+                >
+                  <Image
+                    src={image}
+                    alt={`Imagen ${idx + 1} de ${project.title}`}
+                    className="w-full h-64 object-cover"
+                    width={500}
+                    height={300}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         ))}
       </div>
