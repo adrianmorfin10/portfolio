@@ -79,7 +79,7 @@ export default function Projects() {
   }, [controlsArray]);
 
   return (
-    <section className="py-20 bg-[#ffffff] text-white ">
+    <section className="py-20 bg-[#ffffff] text-white">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-10">Proyectos</h2>
 
