@@ -12,13 +12,13 @@
   --c-purple-rgb: 163, 153, 168;
   --c-grey: #e6dfe4;
   --c-grey-rgb: 230, 223, 228;
-  --c-grey-dark: #060606;
+  --c-grey-dark: #000000;
   --c-grey-dark-rgb: 84, 77, 86;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
   }
 }

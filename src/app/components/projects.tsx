@@ -42,40 +42,44 @@ const projects: Project[] = [
 
 export default function Projects() {
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const controls = useAnimation();
+  const controlsArray = projects.map(() => useAnimation()); // Un control para cada proyecto
 
   useEffect(() => {
-    // Copiamos projectRefs.current a una variable local
     const currentRefs = projectRefs.current;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            controls.start("visible");
-          } else {
-            controls.start("hidden");
-          }
-        });
-      },
-      { threshold: 0.5 } // Ajusta el threshold según sea necesario
-    );
+    // Creamos un IntersectionObserver para cada proyecto
+    const observers = currentRefs.map((ref, index) => {
+      if (!ref) return;
 
-    // Observamos cada referencia
-    currentRefs.forEach((ref) => {
-      if (ref) observer.observe(ref);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              controlsArray[index].start("visible"); // Animación para el proyecto visible
+            } else {
+              controlsArray[index].start("hidden"); // Animación para el proyecto oculto
+            }
+          });
+        },
+        { threshold: 0.1 } // Ajusta el threshold según sea necesario
+      );
+
+      observer.observe(ref); // Observamos el contenedor del proyecto
+      return observer;
     });
 
     // Función de limpieza
     return () => {
-      currentRefs.forEach((ref) => {
-        if (ref) observer.unobserve(ref);
+      observers.forEach((observer, index) => {
+        if (observer && currentRefs[index]) {
+          observer.unobserve(currentRefs[index]!);
+        }
       });
     };
-  }, [controls]);
+  }, [controlsArray]);
 
   return (
-    <section className="py-20 bg-black text-white">
+    <section className="py-20 bg-[#ffffff] text-white ">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-10">Proyectos</h2>
 
@@ -83,10 +87,10 @@ export default function Projects() {
           <motion.div
             key={project.id}
             ref={(el) => {
-              if (el) projectRefs.current[index] = el; // Asignamos la referencia sin devolver nada
+              if (el) projectRefs.current[index] = el; // Asignamos la referencia
             }}
             initial="hidden"
-            animate={controls}
+            animate={controlsArray[index]} // Usamos el control correspondiente
             variants={{
               visible: { opacity: 1, y: 0, scale: 1 },
               hidden: { opacity: 0, y: 50, scale: 0.9 },
@@ -99,23 +103,27 @@ export default function Projects() {
             </motion.h3>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {/* Video (oculto en móviles) */}
               <motion.div
                 variants={{
                   visible: { opacity: 1, x: 0 },
                   hidden: { opacity: 0, x: -50 },
                 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="md:col-span-2 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black"
+                className="md:col-span-2 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black hidden md:block"
               >
                 <video
                   src={project.media.video}
                   autoPlay
                   loop
                   muted
+                  playsInline
+                  controls={false}
                   className="w-full h-64 object-cover"
                 />
               </motion.div>
 
+              {/* Descripción */}
               <motion.div
                 variants={{
                   visible: { opacity: 1, y: 0 },
@@ -127,6 +135,7 @@ export default function Projects() {
                 <p className="text-grey">{project.description}</p>
               </motion.div>
 
+              {/* Roles */}
               <motion.div
                 variants={{
                   visible: { opacity: 1, y: 0 },
@@ -143,6 +152,7 @@ export default function Projects() {
                 </ul>
               </motion.div>
 
+              {/* Imágenes */}
               {project.media.images.map((image, idx) => (
                 <motion.div
                   key={idx}
