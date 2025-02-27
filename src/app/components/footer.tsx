@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import Image from 'next/image'; // Importa el componente Image de Next.js
 
 export default function Footer() {
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -24,22 +25,30 @@ export default function Footer() {
   }, []);
 
   return (
-    <div className="relative  rounded-t-[100px]  bg-[#000000] flex justify-center items-center min-h-[600px]">
+    <div className="relative rounded-t-[100px] bg-[#000000] flex justify-center items-center min-h-[600px]">
       <footer
         ref={footerRef}
         className="bg-black rounded-2xl p-12 text-center mt-10 relative overflow-hidden w-full max-w-5xl flex flex-col justify-between min-h-[500px]"
       >
         {/* Imagen de letras enmascaradas */}
         <div className="absolute inset-0 z-10 pointer-events-none">
-          <img src="/layer.png" alt="Letras" className="w-full h-full object-cover" />
+          <Image
+            src="/layer.png"
+            alt="Letras"
+            className="w-full h-full object-cover"
+            width={1200} // Ajusta el ancho según tus necesidades
+            height={800} // Ajusta el alto según tus necesidades
+          />
         </div>
 
         {/* Efecto de iluminación con la imagen luna */}
         <div className="absolute w-[5000px] h-[5000px] top-0 left-0 pointer-events-none z-0">
-          <img
+          <Image
             src="/luna.png"
             alt="Luz"
             className="absolute w-[500px] h-[500px] opacity-50 blur-2xl"
+            width={500} // Ajusta el ancho según tus necesidades
+            height={500} // Ajusta el alto según tus necesidades
             style={{
               left: `${mousePos.x}px`,
               top: `${mousePos.y}px`,
