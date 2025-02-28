@@ -41,12 +41,8 @@ const projects: Project[] = [
 ];
 
 export default function Projects() {
-  // Inicializamos los controles de animación en el nivel superior
-  const control1 = useAnimation();
-  const control2 = useAnimation();
-
-  // Creamos un array con los controles
-  const controlsArray = [control1, control2];
+  // Usamos un único control de animación para todos los proyectos
+  const controls = useAnimation();
 
   // Referencias para los proyectos
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -55,16 +51,16 @@ export default function Projects() {
     const currentRefs = projectRefs.current;
 
     // Creamos un IntersectionObserver para cada proyecto
-    const observers = currentRefs.map((ref, index) => {
+    const observers = currentRefs.map((ref) => {
       if (!ref) return;
 
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              controlsArray[index].start("visible"); // Animación para el proyecto visible
+              controls.start("visible"); // Animación para el proyecto visible
             } else {
-              controlsArray[index].start("hidden"); // Animación para el proyecto oculto
+              controls.start("hidden"); // Animación para el proyecto oculto
             }
           });
         },
@@ -83,7 +79,7 @@ export default function Projects() {
         }
       });
     };
-  }, [controlsArray]);
+  }, [controls]);
 
   return (
     <section className="py-20 bg-[#ffffff] text-white">
@@ -97,7 +93,7 @@ export default function Projects() {
               if (el) projectRefs.current[index] = el; // Asignamos la referencia
             }}
             initial="hidden"
-            animate={controlsArray[index]} // Usamos el control correspondiente
+            animate={controls} // Usamos el mismo control para todos los proyectos
             variants={{
               visible: { opacity: 1, y: 0, scale: 1 },
               hidden: { opacity: 0, y: 50, scale: 0.9 },
