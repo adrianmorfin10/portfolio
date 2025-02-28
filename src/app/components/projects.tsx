@@ -25,7 +25,7 @@ const projects: Project[] = [
     cta: "Ver Proyecto",
     media: {
       video: "/out.mp4",
-      images: ["/img1.png", "/img2.png", "/img3.png", "/img4.png", "/img5.png"],
+      images: ["/img1.png", "/img2.png"],
     },
   },
   {
