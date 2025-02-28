@@ -147,7 +147,7 @@ export default function Hero() {
 
           {/* Video */}
           <motion.div
-            className="video-container w-full h-64 md:h-auto overflow-hidden rounded-3xl relative z-30"
+            className="video-container w-full md:h-auto overflow-hidden rounded-3xl relative z-30"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
