@@ -42,12 +42,14 @@ const projects: Project[] = [
 
 export default function Projects() {
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const controlsArray = projects.map(() => useAnimation()); // Initialize controls outside the loop
+
+  // Initialize controlsArray outside the loop
+  const controlsArray = projects.map(() => useAnimation());
 
   useEffect(() => {
     const currentRefs = projectRefs.current;
 
-    // Creamos un IntersectionObserver para cada proyecto
+    // Create an IntersectionObserver for each project
     const observers = currentRefs.map((ref, index) => {
       if (!ref) return;
 
@@ -55,20 +57,20 @@ export default function Projects() {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              controlsArray[index].start("visible"); // Animación para el proyecto visible
+              controlsArray[index].start("visible"); // Animation for visible project
             } else {
-              controlsArray[index].start("hidden"); // Animación para el proyecto oculto
+              controlsArray[index].start("hidden"); // Animation for hidden project
             }
           });
         },
-        { threshold: 0.1 } // Ajusta el threshold según sea necesario
+        { threshold: 0.1 } // Adjust the threshold as needed
       );
 
-      observer.observe(ref); // Observamos el contenedor del proyecto
+      observer.observe(ref); // Observe the project container
       return observer;
     });
 
-    // Función de limpieza
+    // Cleanup function
     return () => {
       observers.forEach((observer, index) => {
         if (observer && currentRefs[index]) {
@@ -87,10 +89,10 @@ export default function Projects() {
           <motion.div
             key={project.id}
             ref={(el) => {
-              if (el) projectRefs.current[index] = el; // Asignamos la referencia
+              if (el) projectRefs.current[index] = el; // Assign the reference
             }}
             initial="hidden"
-            animate={controlsArray[index]} // Usamos el control correspondiente
+            animate={controlsArray[index]} // Use the corresponding control
             variants={{
               visible: { opacity: 1, y: 0, scale: 1 },
               hidden: { opacity: 0, y: 50, scale: 0.9 },
@@ -103,7 +105,7 @@ export default function Projects() {
             </motion.h3>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {/* Video (oculto en móviles) */}
+              {/* Video (hidden on mobile) */}
               <motion.div
                 variants={{
                   visible: { opacity: 1, x: 0 },
@@ -123,7 +125,7 @@ export default function Projects() {
                 />
               </motion.div>
 
-              {/* Descripción */}
+              {/* Description */}
               <motion.div
                 variants={{
                   visible: { opacity: 1, y: 0 },
@@ -152,7 +154,7 @@ export default function Projects() {
                 </ul>
               </motion.div>
 
-              {/* Imágenes */}
+              {/* Images */}
               {project.media.images.map((image, idx) => (
                 <motion.div
                   key={idx}
