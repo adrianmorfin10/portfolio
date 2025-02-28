@@ -40,14 +40,21 @@ const projects: Project[] = [
   },
 ];
 
-// Hook personalizado para manejar animaciones
-function useProjectAnimations(count: number) {
-  const controlsArray = Array.from({ length: count }, () => useAnimation());
+export default function Projects() {
+  // Inicializamos los controles de animación uno por uno en el nivel superior
+  const control1 = useAnimation();
+  const control2 = useAnimation();
+
+  // Creamos un array con los controles
+  const controlsArray = [control1, control2];
+
+  // Referencias para los proyectos
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const currentRefs = projectRefs.current;
 
+    // Creamos un IntersectionObserver para cada proyecto
     const observers = currentRefs.map((ref, index) => {
       if (!ref) return;
 
@@ -55,19 +62,20 @@ function useProjectAnimations(count: number) {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              controlsArray[index].start("visible");
+              controlsArray[index].start("visible"); // Animación para el proyecto visible
             } else {
-              controlsArray[index].start("hidden");
+              controlsArray[index].start("hidden"); // Animación para el proyecto oculto
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 } // Ajusta el threshold según sea necesario
       );
 
-      observer.observe(ref);
+      observer.observe(ref); // Observamos el contenedor del proyecto
       return observer;
     });
 
+    // Función de limpieza
     return () => {
       observers.forEach((observer, index) => {
         if (observer && currentRefs[index]) {
@@ -76,12 +84,6 @@ function useProjectAnimations(count: number) {
       });
     };
   }, [controlsArray]);
-
-  return { controlsArray, projectRefs };
-}
-
-export default function Projects() {
-  const { controlsArray, projectRefs } = useProjectAnimations(projects.length);
 
   return (
     <section className="py-20 bg-[#ffffff] text-white">
@@ -92,10 +94,10 @@ export default function Projects() {
           <motion.div
             key={project.id}
             ref={(el) => {
-              if (el) projectRefs.current[index] = el;
+              if (el) projectRefs.current[index] = el; // Asignamos la referencia
             }}
             initial="hidden"
-            animate={controlsArray[index]}
+            animate={controlsArray[index]} // Usamos el control correspondiente
             variants={{
               visible: { opacity: 1, y: 0, scale: 1 },
               hidden: { opacity: 0, y: 50, scale: 0.9 },
