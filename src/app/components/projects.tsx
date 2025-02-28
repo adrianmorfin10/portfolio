@@ -41,7 +41,7 @@ const projects: Project[] = [
 ];
 
 export default function Projects() {
-  // Inicializamos los controles de animación uno por uno en el nivel superior
+  // Inicializamos los controles de animación en el nivel superior
   const control1 = useAnimation();
   const control2 = useAnimation();
 
