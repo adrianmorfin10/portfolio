@@ -40,16 +40,14 @@ const projects: Project[] = [
   },
 ];
 
-export default function Projects() {
+// Hook personalizado para manejar animaciones
+function useProjectAnimations(count: number) {
+  const controlsArray = Array.from({ length: count }, () => useAnimation());
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  // Initialize controlsArray outside the loop
-  const controlsArray = projects.map(() => useAnimation());
 
   useEffect(() => {
     const currentRefs = projectRefs.current;
 
-    // Create an IntersectionObserver for each project
     const observers = currentRefs.map((ref, index) => {
       if (!ref) return;
 
@@ -57,20 +55,19 @@ export default function Projects() {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              controlsArray[index].start("visible"); // Animation for visible project
+              controlsArray[index].start("visible");
             } else {
-              controlsArray[index].start("hidden"); // Animation for hidden project
+              controlsArray[index].start("hidden");
             }
           });
         },
-        { threshold: 0.1 } // Adjust the threshold as needed
+        { threshold: 0.1 }
       );
 
-      observer.observe(ref); // Observe the project container
+      observer.observe(ref);
       return observer;
     });
 
-    // Cleanup function
     return () => {
       observers.forEach((observer, index) => {
         if (observer && currentRefs[index]) {
@@ -79,6 +76,12 @@ export default function Projects() {
       });
     };
   }, [controlsArray]);
+
+  return { controlsArray, projectRefs };
+}
+
+export default function Projects() {
+  const { controlsArray, projectRefs } = useProjectAnimations(projects.length);
 
   return (
     <section className="py-20 bg-[#ffffff] text-white">
@@ -89,10 +92,10 @@ export default function Projects() {
           <motion.div
             key={project.id}
             ref={(el) => {
-              if (el) projectRefs.current[index] = el; // Assign the reference
+              if (el) projectRefs.current[index] = el;
             }}
             initial="hidden"
-            animate={controlsArray[index]} // Use the corresponding control
+            animate={controlsArray[index]}
             variants={{
               visible: { opacity: 1, y: 0, scale: 1 },
               hidden: { opacity: 0, y: 50, scale: 0.9 },
@@ -105,7 +108,7 @@ export default function Projects() {
             </motion.h3>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {/* Video (hidden on mobile) */}
+              {/* Video (oculto en móviles) */}
               <motion.div
                 variants={{
                   visible: { opacity: 1, x: 0 },
@@ -125,7 +128,7 @@ export default function Projects() {
                 />
               </motion.div>
 
-              {/* Description */}
+              {/* Descripción */}
               <motion.div
                 variants={{
                   visible: { opacity: 1, y: 0 },
@@ -154,7 +157,7 @@ export default function Projects() {
                 </ul>
               </motion.div>
 
-              {/* Images */}
+              {/* Imágenes */}
               {project.media.images.map((image, idx) => (
                 <motion.div
                   key={idx}
