@@ -52,7 +52,7 @@ const projects: Project[] = [
 ];
 
 export default function Projects() {
-  // Inicializamos los controles de animación fuera del bucle
+  // Inicializamos los controles de animación dentro del componente
   const controlsArray = projects.map(() => useAnimation());
 
   // Referencias para los proyectos
