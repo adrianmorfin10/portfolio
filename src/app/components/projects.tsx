@@ -52,8 +52,13 @@ const projects: Project[] = [
 ];
 
 export default function Projects() {
-  // Inicializamos los controles de animación fuera del loop
-  const controlsArray = projects.map(() => useAnimation());
+  // Initialize `useAnimation` hooks statically for each project
+  const control1 = useAnimation();
+  const control2 = useAnimation();
+  const control3 = useAnimation();
+
+  // Store the controls in an array
+  const controlsArray = [control1, control2, control3];
 
   // Referencias para los proyectos
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
