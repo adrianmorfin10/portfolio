@@ -110,7 +110,7 @@ export default function Section() {
           <div className="flex items-center space-x-4">
             <p className="text-white text-sm md:text-sm font-light">Preciso. Innovador.</p>
             <video
-              src="/out3.mp4" // Ruta del video
+              src="/out8.mp4" // Ruta del video
               autoPlay
               loop
               muted
