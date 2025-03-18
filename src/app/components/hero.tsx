@@ -49,14 +49,14 @@ export default function Hero() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-[200%] h-[200%] animate-moveBackground">
           {/* Manchas negras */}
-          <div className="absolute w-60 h-60 bg-black rounded-full top-1/4 left-1/4 animate-float blur-md"></div>
-          <div className="absolute w-80 h-80 bg-black rounded-full top-1/2 left-1/2 animate-float blur-md"></div>
-          <div className="absolute w-100 h-100 bg-black rounded-full top-3/4 left-3/4 animate-float blur-md"></div>
-          <div className="absolute w-70 h-70 bg-black rounded-full top-1/4 left-3/4 animate-float blur-md"></div>
-          <div className="absolute w-90 h-90 bg-black rounded-full top-3/4 left-1/4 animate-float blur-md"></div>
-          <div className="absolute w-50 h-80 bg-black rounded-full top-1/2 left-1/4 animate-float blur-md"></div>
-          <div className="absolute w-60 h-60 bg-black rounded-full top-1/4 left-2/4 animate-float blur-md"></div>
-          <div className="absolute w-80 h-80 bg-black rounded-full top-2/4 left-3/4 animate-float blur-md"></div>
+          <div className="absolute w-60 h-60 bg-black rounded-full top-1/4 left-1/4 animate-float blur-2xl"></div>
+          <div className="absolute w-80 h-80 bg-black rounded-full top-1/2 left-1/2 animate-float blur-2xl"></div>
+          <div className="absolute w-100 h-100 bg-black rounded-full top-3/4 left-3/4 animate-float blur-2xl"></div>
+          <div className="absolute w-70 h-70 bg-black rounded-full top-1/4 left-3/4 animate-float blur-2xl"></div>
+          <div className="absolute w-90 h-90 bg-black rounded-full top-3/4 left-1/4 animate-float blur-2xl"></div>
+          <div className="absolute w-50 h-80 bg-black rounded-full top-1/2 left-1/4 animate-float blur-2xl"></div>
+          <div className="absolute w-60 h-60 bg-black rounded-full top-1/4 left-2/4 animate-float blur-2xl"></div>
+          <div className="absolute w-80 h-80 bg-black rounded-full top-2/4 left-3/4 animate-float blur-2xl"></div>
         </div>
       </div>
 

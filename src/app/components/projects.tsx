@@ -38,15 +38,22 @@ const projects: Project[] = [
       images: ["/agenda1.png", "/agenda2.png"],
     },
   },
+  {
+    id: 3,
+    title: "Coinsturn",
+    description: "Desarrollé una plataforma de intercambio de criptomonedas...",
+    roles: ["Desarrollador Fullstack", "Diseñador UX/UI"],
+    cta: "Ver Proyecto",
+    media: {
+      video: "/out6.mp4",
+      images: ["/coins1.png", "/coins2.png"],
+    },
+  },
 ];
 
 export default function Projects() {
-  // Inicializamos los controles de animación en el nivel superior
-  const control1 = useAnimation();
-  const control2 = useAnimation();
-
-  // Creamos un array con los controles
-  const controlsArray = [control1, control2];
+  // Inicializamos los controles de animación dentro del componente
+  const controlsArray = projects.map(() => useAnimation());
 
   // Referencias para los proyectos
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);

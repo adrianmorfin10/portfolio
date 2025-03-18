@@ -58,3 +58,28 @@ body {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+
+:root {
+  --delay: 0.1s; /* Retraso entre letras */
+}
+
+/* Animación para las letras (más lenta y fluida) */
+@keyframes letterAnimation {
+  0% {
+    transform: translateY(100%);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  80% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-letter {
+  animation: letterAnimation 5s linear infinite; /* Animación más lenta */
+}
