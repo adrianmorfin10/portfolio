@@ -3,9 +3,10 @@
 
 
 import React, { useRef } from "react";
-import { motion } from "framer-motion";
+
 import Image from "next/image";
 import Head from "next/head";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function CursosPage() {
   const cursosRef = useRef<HTMLDivElement>(null);
@@ -20,6 +21,20 @@ export default function CursosPage() {
   const scrollToCursos = () => {
     cursosRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+  const [isExpanded, setIsExpanded] = React.useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false,
+    8: false,
+    9: false,
+    10: false,
+    11: false,
+    // ... y así para todos los módulos
+  });
 
  
 
@@ -37,6 +52,7 @@ export default function CursosPage() {
         {/* Contenido principal */}
         <div className="container mx-auto relative z-10 py-16 px-4 text-gray-800">
           {/* Hero section */}
+          
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 50 }}
@@ -102,8 +118,8 @@ export default function CursosPage() {
                 </div>
                 
                 {/* Mid-Level */}
-                <div className="bg-purple-50 border border-purple-100 rounded-2xl p-6">
-                  <h3 className="text-2xl font-bold mb-4 text-purple-800">Mid-Level</h3>
+                <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
+                  <h3 className="text-2xl font-bold mb-4 text-blue-800">Mid-Level</h3>
                   <p className="mb-4 text-gray-700">2-5 años de experiencia</p>
                   <div className="space-y-4">
                     <div>
@@ -115,23 +131,23 @@ export default function CursosPage() {
                       <p className="text-xl font-bold text-gray-900">$500,000 - $800,000 MXN</p>
                     </div>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-purple-100">
-                    <h4 className="font-bold mb-2 text-purple-700">Habilidades requeridas:</h4>
+                  <div className="mt-6 pt-4 border-t border-blue-100">
+                    <h4 className="font-bold mb-2 text-blue-700">Habilidades requeridas:</h4>
                     <ul className="space-y-2 text-sm text-gray-700">
                       <li className="flex items-start">
-                        <span className="mr-2 text-purple-500">•</span>
+                        <span className="mr-2 text-blue-500">•</span>
                         <span>Figma avanzado + prototipado</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="mr-2 text-purple-500">•</span>
+                        <span className="mr-2 text-blue-500">•</span>
                         <span>Investigación de usuarios</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="mr-2 text-purple-500">•</span>
+                        <span className="mr-2 text-blue-500">•</span>
                         <span>Experiencia en proyectos reales</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="mr-2 text-purple-500">•</span>
+                        <span className="mr-2 text-blue-500">•</span>
                         <span>Trabajo con desarrolladores</span>
                       </li>
                     </ul>
@@ -180,23 +196,23 @@ export default function CursosPage() {
                 </div>
               </div>
               
-              <div className="bg-yellow-50 border border-yellow-100 rounded-2xl p-6">
-                <h3 className="text-xl font-bold mb-4 text-yellow-800">Notas importantes:</h3>
+              <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
+                <h3 className="text-xl font-bold mb-4 text-blue-800">Notas importantes:</h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
-                    <span className="mr-2 text-yellow-500">•</span>
+                    <span className="mr-2 text-blue-500">•</span>
                     <span>Los salarios pueden variar significativamente dependiendo de la empresa (startup vs corporativo), industria y ubicación</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="mr-2 text-yellow-500">•</span>
+                    <span className="mr-2 text-blue-500">•</span>
                     <span>Diseñadores que trabajan para empresas internacionales (remoto) pueden ganar en dólares, incrementando estos rangos</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="mr-2 text-yellow-500">•</span>
+                    <span className="mr-2 text-blue-500">•</span>
                     <span>El 80% de nuestros estudiantes consiguen empleo en los primeros 3 meses después de completar el curso avanzado</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="mr-2 text-yellow-500">•</span>
+                    <span className="mr-2 text-blue-500">•</span>
                     <span>Los diseñadores con habilidades complementarias (front-end básico, investigación, etc.) suelen obtener mejores salarios</span>
                   </li>
                 </ul>
@@ -374,302 +390,976 @@ export default function CursosPage() {
             </motion.div>
           </div>
 
-          {/* Plan de estudios completo */}
-          <motion.div 
-            className="bg-white border border-gray-200 rounded-3xl p-8 mb-16 shadow-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
+{/* Plan de estudios completo */}
+<motion.div 
+  className="bg-white border border-gray-200 rounded-3xl p-8 mb-16 shadow-sm"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.3 }}
+>
+  <h2 className="text-3xl font-bold mb-8 text-center text-gray-900">Plan de Estudios Completo</h2>
+  
+  <div className="space-y-6">
+    {/* Módulo 1 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 1: !prev[1]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 1</span>
+            <h3 className="text-xl font-bold text-gray-900">Introducción al Diseño de Productos Digitales</h3>
+          </div>
+          <p className="text-gray-600">Fundamentos esenciales de UX/UI y su papel en la creación de productos</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[1] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[1] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
           >
-            <h2 className="text-3xl font-bold mb-8 text-center text-gray-900">Plan de Estudios Completo</h2>
-            
-            <div className="space-y-12">
-              {/* Módulo 1 */}
-              <div className="bg-gray-50 p-6 rounded-2xl">
-                <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 1: Introducción al Diseño de Productos Digitales</h3>
-                <p className="mb-4 text-gray-600">Visión general del diseño de productos digitales, incluyendo UX y UI. Aprenderás los conceptos básicos y su papel crítico en la creación de productos.</p>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Diferencias entre UX y UI</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Herramientas esenciales (Figma, Sketch, Adobe XD)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Metodologías de innovación (Design Thinking, Lean Startup)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Business Model Canvas</span>
-                  </li>
-                </ul>
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-                  <p className="text-gray-700">Proyecto: Desarrollar un proyecto usando metodología Lean UX</p>
-                  <p className="text-gray-700">Evaluación: Test de conceptos básicos</p>
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Diferencias entre UX y UI</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Herramientas esenciales (Figma, Sketch, Adobe XD)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Metodologías de innovación (Design Thinking, Lean Startup)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Business Model Canvas</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Desarrollar un proyecto usando metodología Lean UX</p>
+                    <p className="text-gray-700">Evaluación: Test de conceptos básicos</p>
+                  </div>
                 </div>
               </div>
-
-              {/* Módulo 2 */}
-              <div className="bg-gray-50 p-6 rounded-2xl">
-                <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 2: Investigación y Empatía</h3>
-                <p className="mb-4 text-gray-600">Aprenderás a realizar investigaciones exhaustivas para identificar las verdaderas necesidades de los usuarios.</p>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Diseño Centrado en el Usuario</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Personas y Mapas de Empatía</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Métodos de Investigación (entrevistas, encuestas)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Accesibilidad e Inclusión</span>
-                  </li>
-                </ul>
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-                  <p className="text-gray-700">Proyecto: Análisis de stakeholders y creación de persona</p>
-                  <p className="text-gray-700">Evaluación: Cuestionario sobre métodos de investigación</p>
-                </div>
-              </div>
-
-              {/* Módulo 3 */}
-              <div className="bg-gray-50 p-6 rounded-2xl">
-                <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 3: Ideación y Estrategia</h3>
-                <p className="mb-4 text-gray-600">Explorarás métodos creativos para generación de ideas y desarrollo de estrategias alineadas con objetivos de negocio.</p>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Técnicas de brainstorming</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Método MOSCOW para priorización</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Creación de diagramas de flujo</span>
-                  </li>
-                </ul>
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-                  <p className="text-gray-700">Proyecto: Flujo de usuario en FigJam</p>
-                  <p className="text-gray-700">Evaluación: Test de técnicas de ideación</p>
-                </div>
-              </div>
-
-              {/* Módulo 4 */}
-              <div className="bg-gray-50 p-6 rounded-2xl">
-                <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 4: Prototipado y Pruebas</h3>
-                <p className="mb-4 text-gray-600">Aprenderás a crear prototipos desde baja hasta alta fidelidad y realizar pruebas de usabilidad.</p>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Arquitectura de información</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Prototipado en Figma/Adobe XD</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Pruebas de usabilidad</span>
-                  </li>
-                </ul>
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-                  <p className="text-gray-700">Proyecto: Prototipo funcional con pruebas</p>
-                  <p className="text-gray-700">Evaluación: Test de arquitectura de información</p>
-                </div>
-              </div>
-
-              {/* Módulo 5 */}
-              <div className="bg-gray-50 p-6 rounded-2xl">
-                <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 5: UX Writing</h3>
-                <p className="mb-4 text-gray-600">Dominarás la creación de contenido efectivo para interfaces digitales.</p>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Diferencias UX Writing vs Copywriting</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Definición de voz y tono</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Patrones de escritura efectiva</span>
-                  </li>
-                </ul>
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-                  <p className="text-gray-700">Proyecto: Refinamiento de contenido en wireframes</p>
-                  <p className="text-gray-700">Evaluación: Cuestionario teórico-práctico</p>
-                </div>
-              </div>
-
-               {/* Módulo 6 */}
-               <div className="bg-gray-50 p-6 rounded-2xl">
-                <h3 className="text-xl font-bold mb-4 text-gray-800">Modulo 6. Diseño Gráfico y UI</h3>
-                <p className="mb-4 text-gray-600">Aborda los principios del diseño visual, desde los fundamentos del diseño gráfico hasta la creación de interfaces de usuario atractivas y funcionales.</p>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Principios de Diseño de Interfaz</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Psicología del Color y Diseño Gráfico</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>Herramientas Gráficas</span>
-                  </li>
-                </ul>
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-                  <p className="text-gray-700">Proyecto:Crear un moodboard, wireframes de alta fidelidad y una guía de estilos.</p>
-                  <p className="text-gray-700">Evaluación: Diseño gráfico y psicología del color.</p>
-                </div>
-              </div>
-              {/* Módulo 7 */}
-<div className="bg-gray-50 p-6 rounded-2xl">
-  <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 7: Diseño Web y Responsivo</h3>
-  <p className="mb-4 text-gray-600">Este módulo explora la creación de sitios web responsivos y la importancia de un diseño adaptable para diferentes dispositivos y plataformas.</p>
-  <ul className="space-y-3 text-gray-600">
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Diseño Web: Fundamentos del diseño web y su adaptación a diferentes dispositivos</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Diseño Responsivo: Técnicas para crear interfaces adaptables a todas las resoluciones</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Fundamentos de HTML y CSS: Introducción a la programación básica para diseñadores</span>
-    </li>
-  </ul>
-  <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-    <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-    <p className="text-gray-700">Proyecto: Diseñar un sitio web responsivo usando Figma y crear un prototipo funcional</p>
-    <p className="text-gray-700">Evaluación: Formulario sobre principios de diseño web y responsive design</p>
-  </div>
-</div>
-
-{/* Módulo 8 */}
-<div className="bg-gray-50 p-6 rounded-2xl">
-  <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 8: Sistemas de Diseño y Componentes</h3>
-  <p className="mb-4 text-gray-600">Este módulo profundiza en la creación de sistemas de diseño y componentes reutilizables, esenciales para mantener la coherencia en proyectos grandes y complejos.</p>
-  <ul className="space-y-3 text-gray-600">
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Atomic Design: Creación de componentes básicos y complejos en Figma</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Sistemas de Diseño: Desarrollo de sistemas que permitan escalabilidad y consistencia</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Bibliotecas de Componentes: Cómo crear y gestionar bibliotecas reutilizables</span>
-    </li>
-  </ul>
-  <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-    <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-    <p className="text-gray-700">Proyecto: Crear un kit de UI utilizando principios de Atomic Design</p>
-    <p className="text-gray-700">Evaluación: Formulario sobre creación y gestión de sistemas de diseño</p>
-  </div>
-</div>
-
-{/* Módulo 9 */}
-<div className="bg-gray-50 p-6 rounded-2xl">
-  <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 9: AI y Herramientas Avanzadas</h3>
-  <p className="mb-4 text-gray-600">Exploración de herramientas avanzadas y el uso de inteligencia artificial para potenciar el trabajo de un diseñador UX/UI.</p>
-  <ul className="space-y-3 text-gray-600">
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Herramientas de AI: Uso de IA para optimizar procesos de diseño</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Integración de AI en UX/UI: Cómo la IA está transformando el campo del diseño</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Herramientas Avanzadas: ChatGPT y otras herramientas para mejorar eficiencia</span>
-    </li>
-  </ul>
-  <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-    <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-    <p className="text-gray-700">Proyecto: Implementar AI en el proceso de diseño de un proyecto real</p>
-    <p className="text-gray-700">Evaluación: Test sobre herramientas de AI y su aplicación en UX/UI</p>
-  </div>
-</div>
-
-{/* Módulo 10 */}
-<div className="bg-gray-50 p-6 rounded-2xl">
-  <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 10: UX Green y Sostenibilidad</h3>
-  <p className="mb-4 text-gray-600">Introducción al concepto de UX Green, centrándose en prácticas sostenibles dentro del diseño UX/UI.</p>
-  <ul className="space-y-3 text-gray-600">
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Principios de UX Green: Diseñar con mentalidad sostenible</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Sostenibilidad en UX/UI: Prácticas para productos digitales ecológicos</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Casos de Estudio: Ejemplos de productos digitales sostenibles</span>
-    </li>
-  </ul>
-  <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-    <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-    <p className="text-gray-700">Proyecto: Diseñar una plataforma digital con principios de sostenibilidad</p>
-    <p className="text-gray-700">Evaluación: Formulario sobre conceptos de UX Green</p>
-  </div>
-</div>
-
-{/* Módulo 11 */}
-<div className="bg-gray-50 p-6 rounded-2xl">
-  <h3 className="text-xl font-bold mb-4 text-gray-800">Módulo 11: Preparación Profesional</h3>
-  <p className="mb-4 text-gray-600">Preparación para el mercado laboral, desde creación de portafolio hasta estrategias para entrevistas.</p>
-  <ul className="space-y-3 text-gray-600">
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Preparación para Entrevistas: Estrategias para entrevistas exitosas</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Desarrollo de Portafolio: Creación de un portafolio impactante</span>
-    </li>
-    <li className="flex items-start">
-      <span className="mr-2 text-blue-500">•</span>
-      <span>Gestión de Carrera: Herramientas para avanzar profesionalmente</span>
-    </li>
-  </ul>
-  <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-    <h4 className="font-bold mb-2 text-blue-600">Actividades:</h4>
-    <p className="text-gray-700">Proyecto: Creación de portafolio en Behance con 4-8 proyectos</p>
-    <p className="text-gray-700">Evaluación: Simulación de entrevistas y test sobre desarrollo de carrera</p>
-  </div>
-</div>
-
-              {/* Módulos 6-11 seguirían el mismo patrón */}
-             
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 2 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 2: !prev[2]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 2</span>
+            <h3 className="text-xl font-bold text-gray-900">Investigación y Empatía</h3>
+          </div>
+          <p className="text-gray-600">Identificación de necesidades reales de los usuarios</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[2] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[2] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Diseño Centrado en el Usuario</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Personas y Mapas de Empatía</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Métodos de Investigación (entrevistas, encuestas)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Accesibilidad e Inclusión</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Análisis de stakeholders y creación de persona</p>
+                    <p className="text-gray-700">Evaluación: Cuestionario sobre métodos de investigación</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 3 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 3: !prev[3]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 3</span>
+            <h3 className="text-xl font-bold text-gray-900">Ideación y Estrategia</h3>
+          </div>
+          <p className="text-gray-600">Generación de ideas y desarrollo de estrategias</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[3] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[3] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Técnicas de brainstorming</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Método MOSCOW para priorización</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Creación de diagramas de flujo</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Flujo de usuario en FigJam</p>
+                    <p className="text-gray-700">Evaluación: Test de técnicas de ideación</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 4 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 4: !prev[4]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 4</span>
+            <h3 className="text-xl font-bold text-gray-900">Prototipado y Pruebas</h3>
+          </div>
+          <p className="text-gray-600">Creación de prototipos y validación con usuarios</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[4] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[4] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Arquitectura de información</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Prototipado en Figma/Adobe XD</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Pruebas de usabilidad</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Prototipo funcional con pruebas</p>
+                    <p className="text-gray-700">Evaluación: Test de arquitectura de información</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 5 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 5: !prev[5]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 5</span>
+            <h3 className="text-xl font-bold text-gray-900">UX Writing</h3>
+          </div>
+          <p className="text-gray-600">Creación de contenido efectivo para interfaces</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[5] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[5] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Diferencias UX Writing vs Copywriting</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Definición de voz y tono</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Patrones de escritura efectiva</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Refinamiento de contenido en wireframes</p>
+                    <p className="text-gray-700">Evaluación: Cuestionario teórico-práctico</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 6 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 6: !prev[6]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 6</span>
+            <h3 className="text-xl font-bold text-gray-900">Diseño Gráfico y UI</h3>
+          </div>
+          <p className="text-gray-600">Principios del diseño visual y creación de interfaces</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[6] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[6] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Principios de Diseño de Interfaz</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Psicología del Color y Diseño Gráfico</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Herramientas Gráficas</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Moodboard, wireframes de alta fidelidad y guía de estilos</p>
+                    <p className="text-gray-700">Evaluación: Diseño gráfico y psicología del color</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 7 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 7: !prev[7]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 7</span>
+            <h3 className="text-xl font-bold text-gray-900">Diseño Web y Responsivo</h3>
+          </div>
+          <p className="text-gray-600">Creación de sitios web adaptables a diferentes dispositivos</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[7] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[7] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Diseño Web: Fundamentos y adaptación a dispositivos</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Diseño Responsivo: Técnicas para interfaces adaptables</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Fundamentos de HTML y CSS para diseñadores</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Diseñar un sitio web responsivo usando Figma</p>
+                    <p className="text-gray-700">Evaluación: Formulario sobre diseño web y responsive</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 8 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 8: !prev[8]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 8</span>
+            <h3 className="text-xl font-bold text-gray-900">Sistemas de Diseño y Componentes</h3>
+          </div>
+          <p className="text-gray-600">Creación de sistemas escalables y componentes reutilizables</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[8] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[8] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Atomic Design: Componentes básicos y complejos</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Sistemas de Diseño: Escalabilidad y consistencia</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Bibliotecas de Componentes reutilizables</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Crear un kit de UI con Atomic Design</p>
+                    <p className="text-gray-700">Evaluación: Formulario sobre sistemas de diseño</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 9 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 9: !prev[9]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 9</span>
+            <h3 className="text-xl font-bold text-gray-900">AI y Herramientas Avanzadas</h3>
+          </div>
+          <p className="text-gray-600">Uso de inteligencia artificial para potenciar el diseño</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[9] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[9] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Herramientas de AI para optimizar procesos</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Integración de AI en UX/UI</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>ChatGPT y otras herramientas para eficiencia</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Implementar AI en un proyecto real</p>
+                    <p className="text-gray-700">Evaluación: Test sobre herramientas de AI</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 10 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 10: !prev[10]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 10</span>
+            <h3 className="text-xl font-bold text-gray-900">UX Green y Sostenibilidad</h3>
+          </div>
+          <p className="text-gray-600">Prácticas sostenibles en el diseño de productos digitales</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[10] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[10] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Principios de UX Green</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Diseño de productos digitales ecológicos</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Casos de estudio de productos sostenibles</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Plataforma digital con principios de sostenibilidad</p>
+                    <p className="text-gray-700">Evaluación: Formulario sobre UX Green</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+
+    {/* Módulo 11 */}
+    <motion.div 
+      className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl overflow-hidden"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div 
+        className="p-6 cursor-pointer flex justify-between items-center"
+        onClick={() => setIsExpanded(prev => ({...prev, 11: !prev[11]}))}
+      >
+        <div>
+          <div className="flex items-center mb-2">
+            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 11</span>
+            <h3 className="text-xl font-bold text-gray-900">Preparación Profesional</h3>
+          </div>
+          <p className="text-gray-600">Preparación para el mercado laboral en UX/UI</p>
+        </div>
+        <motion.div
+          animate={{ rotate: isExpanded[11] ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isExpanded[11] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold mb-3 text-blue-700">Contenido detallado:</h4>
+              <ul className="space-y-3 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Preparación para entrevistas técnicas</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Desarrollo de portafolio impactante</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Gestión de carrera profesional</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full p-1 mr-3">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>Negociación salarial y beneficios</span>
+                </li>
+              </ul>
+              
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                <div className="flex items-start">
+                  <span className="flex-shrink-0 bg-blue-600 text-white rounded-full p-1 mr-3 mt-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="font-bold text-blue-700 mb-1">Actividades prácticas</h4>
+                    <p className="text-gray-700">Proyecto: Portafolio en Behance con 4-8 proyectos</p>
+                    <p className="text-gray-700">Evaluación: Simulación de entrevistas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  </div>
+</motion.div>
 
           {/* Preguntas frecuentes */}
           <motion.div 
@@ -718,7 +1408,7 @@ export default function CursosPage() {
 
               <div>
                 <h3 className="text-xl font-bold mb-2 text-gray-800">¿El certificado tiene validez oficial?</h3>
-                <p className="text-gray-600">Nuestro certificado es reconocido en la industria y acreditado por nuestra experiencia trabajando con empresas líderes. Muchos de nuestros estudiantes lo han usado para conseguir empleo.</p>
+                <p className="text-gray-600">Nuestro certificado es reconocido en la industria y acblueitado por nuestra experiencia trabajando con empresas líderes. Muchos de nuestros estudiantes lo han usado para conseguir empleo.</p>
               </div>
             </div>
           </motion.div>
