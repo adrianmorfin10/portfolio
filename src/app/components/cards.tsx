@@ -9,7 +9,7 @@ const cards = [
     title: "Curso Profesional UX/UI",
     description: "Programa completo de 6 meses para convertirte en diseñador de producto digital. Metodología práctica con proyectos reales y mentoría personalizada.",
     cta: "Ver programa completo",
-    link: "cursos",
+    link: "#curso",
     features: [
       "✅ Introducción al diseño digital",
       "✅ UX Research & entrevistas",
@@ -54,31 +54,23 @@ export default function ServiciosCards() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const observers = cardRefs.current.map((ref, index) => {
-      if (!ref) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cardRefs.current.findIndex(ref => ref === entry.target);
+          if (index !== -1 && entry.isIntersecting) {
+            controls[index].start("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              controls[index].start("visible");
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      observer.observe(ref);
-      return observer;
+    cardRefs.current.forEach(ref => {
+      if (ref) observer.observe(ref);
     });
 
-    return () => {
-      observers.forEach((observer, index) => {
-        if (observer && cardRefs.current[index]) {
-          observer.unobserve(cardRefs.current[index]!);
-        }
-      });
-    };
+    return () => observer.disconnect();
   }, [controls]);
 
   return (
