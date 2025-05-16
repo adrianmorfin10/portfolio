@@ -9,7 +9,7 @@ const cards = [
     title: "Curso Profesional UX/UI",
     description: "Programa completo de 6 meses para convertirte en diseñador de producto digital. Metodología práctica con proyectos reales y mentoría personalizada.",
     cta: "Ver programa completo",
-    link: "#curso",
+    link: "cursos",
     features: [
       "✅ Introducción al diseño digital",
       "✅ UX Research & entrevistas",
