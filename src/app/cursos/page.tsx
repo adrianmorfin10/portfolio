@@ -19,9 +19,7 @@ export default function CursosPage() {
     cursosRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const scrollToSalarios = () => {
-    salariosRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+ 
 
   return (
     <>
