@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import Head from "next/head";
 
 const cards = [
@@ -50,7 +50,11 @@ const cards = [
 ];
 
 export default function ServiciosCards() {
-  const controls = cards.map(() => useAnimation());
+  // Initialize animations safely
+  const controls1 = useAnimation();
+  const controls2 = useAnimation();
+  const controlsArray = useMemo(() => [controls1, controls2], [controls1, controls2]);
+  
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -59,7 +63,7 @@ export default function ServiciosCards() {
         entries.forEach((entry) => {
           const index = cardRefs.current.findIndex(ref => ref === entry.target);
           if (index !== -1 && entry.isIntersecting) {
-            controls[index].start("visible");
+            controlsArray[index].start("visible");
           }
         });
       },
@@ -71,7 +75,7 @@ export default function ServiciosCards() {
     });
 
     return () => observer.disconnect();
-  }, [controls]);
+  }, [controlsArray]);
 
   return (
     <>
@@ -100,7 +104,7 @@ export default function ServiciosCards() {
                   cardRefs.current[index] = el;
                 }}
                 initial="hidden"
-                animate={controls[index]}
+                animate={controlsArray[index]}
                 variants={{
                   visible: { opacity: 1, y: 0 },
                   hidden: { opacity: 0, y: 20 },
