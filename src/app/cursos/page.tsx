@@ -411,10 +411,14 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 1: !prev[1]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 1</span>
-            <h3 className="text-xl font-bold text-gray-900">Introducción al Diseño de Productos Digitales</h3>
-          </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+              <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                Módulo 1
+              </span>
+              <h3 className="text-xl font-bold text-gray-900">
+                Introducción al Diseño de Productos Digitales
+              </h3>
+            </div>
           <p className="text-gray-600">Fundamentos esenciales de UX/UI y su papel en la creación de productos</p>
         </div>
         <motion.div
@@ -503,11 +507,15 @@ export default function CursosPage() {
         className="p-6 cursor-pointer flex justify-between items-center"
         onClick={() => setIsExpanded(prev => ({...prev, 2: !prev[2]}))}
       >
-        <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 2</span>
-            <h3 className="text-xl font-bold text-gray-900">Investigación y Empatía</h3>
-          </div>
+        <div>       
+                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+                <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                Módulo 2
+                </span>
+                <h3 className="text-xl font-bold text-gray-900">
+                Investigación y Empatía
+                </h3>
+              </div>
           <p className="text-gray-600">Identificación de necesidades reales de los usuarios</p>
         </div>
         <motion.div
@@ -597,10 +605,15 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 3: !prev[3]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 3</span>
-            <h3 className="text-xl font-bold text-gray-900">Ideación y Estrategia</h3>
-          </div>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+                <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                  Módulo 3
+                </span>
+                <h3 className="text-xl font-bold text-gray-900">
+                Ideación y Estrategia
+                </h3>
+              </div>
+
           <p className="text-gray-600">Generación de ideas y desarrollo de estrategias</p>
         </div>
         <motion.div
@@ -682,10 +695,14 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 4: !prev[4]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 4</span>
-            <h3 className="text-xl font-bold text-gray-900">Prototipado y Pruebas</h3>
-          </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+                <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                  Módulo 4
+                </span>
+                <h3 className="text-xl font-bold text-gray-900">
+                Prototipado y pruebas
+                </h3>
+              </div>
           <p className="text-gray-600">Creación de prototipos y validación con usuarios</p>
         </div>
         <motion.div
@@ -767,10 +784,14 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 5: !prev[5]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 5</span>
-            <h3 className="text-xl font-bold text-gray-900">UX Writing</h3>
-          </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+                <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                  Módulo 5
+                </span>
+                <h3 className="text-xl font-bold text-gray-900">
+                UX Writting
+                </h3>
+              </div>
           <p className="text-gray-600">Creación de contenido efectivo para interfaces</p>
         </div>
         <motion.div
@@ -852,10 +873,14 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 6: !prev[6]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 6</span>
-            <h3 className="text-xl font-bold text-gray-900">Diseño Gráfico y UI</h3>
-          </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+  <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+    Módulo 6
+  </span>
+  <h3 className="text-xl font-bold text-gray-900">
+  Diseño Gráfico y UI
+  </h3>
+</div>
           <p className="text-gray-600">Principios del diseño visual y creación de interfaces</p>
         </div>
         <motion.div
@@ -937,9 +962,13 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 7: !prev[7]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 7</span>
-            <h3 className="text-xl font-bold text-gray-900">Diseño Web y Responsivo</h3>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+            <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+              Módulo 7
+            </span>
+            <h3 className="text-xl font-bold text-gray-900">
+              Introducción al Diseño Web y Reponsivo
+            </h3>
           </div>
           <p className="text-gray-600">Creación de sitios web adaptables a diferentes dispositivos</p>
         </div>
@@ -1022,10 +1051,14 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 8: !prev[8]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 8</span>
-            <h3 className="text-xl font-bold text-gray-900">Sistemas de Diseño y Componentes</h3>
-          </div>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+                <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                  Módulo 8
+                </span>
+                <h3 className="text-xl font-bold text-gray-900">
+                Sistemas de Diseño y Componentes
+                </h3>
+              </div>
           <p className="text-gray-600">Creación de sistemas escalables y componentes reutilizables</p>
         </div>
         <motion.div
@@ -1107,10 +1140,16 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 9: !prev[9]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 9</span>
-            <h3 className="text-xl font-bold text-gray-900">AI y Herramientas Avanzadas</h3>
-          </div>
+         
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+              <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                Módulo 9
+              </span>
+              <h3 className="text-xl font-bold text-gray-900">
+              AI y Herramientas Avanzadas
+              </h3>
+            </div>
+
           <p className="text-gray-600">Uso de inteligencia artificial para potenciar el diseño</p>
         </div>
         <motion.div
@@ -1192,10 +1231,14 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 10: !prev[10]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 10</span>
-            <h3 className="text-xl font-bold text-gray-900">UX Green y Sostenibilidad</h3>
-          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+              <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                Módulo 10
+              </span>
+              <h3 className="text-xl font-bold text-gray-900">
+              UX Green y Sostenibilidad
+              </h3>
+            </div>
           <p className="text-gray-600">Prácticas sostenibles en el diseño de productos digitales</p>
         </div>
         <motion.div
@@ -1277,10 +1320,14 @@ export default function CursosPage() {
         onClick={() => setIsExpanded(prev => ({...prev, 11: !prev[11]}))}
       >
         <div>
-          <div className="flex items-center mb-2">
-            <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mr-3">Módulo 11</span>
-            <h3 className="text-xl font-bold text-gray-900">Preparación Profesional</h3>
-          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
+              <span className="bg-blue-600 text-white text-sm sm:text-xs font-bold px-3 py-1 rounded-full sm:mr-3 self-start sm:self-auto">
+                Módulo 11
+              </span>
+              <h3 className="text-xl font-bold text-gray-900">
+              Preparación Profesional
+              </h3>
+            </div>
           <p className="text-gray-600">Preparación para el mercado laboral en UX/UI</p>
         </div>
         <motion.div

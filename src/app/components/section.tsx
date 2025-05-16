@@ -75,7 +75,7 @@ export default function Section() {
             {currentLetters.map((letter, index) => (
               <span
                 key={index}
-                className="inline-block text-white text-6xl md:text-8xl font-bold"
+                className="inline-block text-white text-4xl md:text-8xl font-bold"
                 style={{
                   transform: `translateY(${isTransitioning ? "100%" : "0"})`,
                   transition: `transform ${LETTER_FALL_DURATION}ms ease-in-out`,
@@ -92,7 +92,7 @@ export default function Section() {
             {nextLetters.map((letter, index) => (
               <span
                 key={index}
-                className="inline-block text-white text-6xl md:text-8xl font-bold"
+                className="inline-block text-white text-4xl md:text-8xl font-bold"
                 style={{
                   transform: `translateY(${isTransitioning ? "0" : "-100%"})`,
                   transition: `transform ${LETTER_FALL_DURATION}ms ease-in-out`,
@@ -106,20 +106,20 @@ export default function Section() {
         </div>
 
         {/* Contenedor 3: 2 palabras con videos */}
-        <div className="flex flex-col items-center space-y-4">
-          <div className="flex items-center space-x-4">
-            <p className="text-white text-sm md:text-sm font-light">Preciso. Innovador.</p>
-            <video
-              src="/out8.mp4" // Ruta del video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-[200px] h-[100px] rounded-md object-cover"
-            />
-            <p className="text-white text-sm md:text-sm font-light">Futurista. Expresivo.</p>
-          </div>
-        </div>
+        <div className="w-full flex flex-col items-center">
+  <div className="flex flex-col md:flex-row items-center justify-center gap-4 px-4 w-full max-w-4xl mx-auto">
+    <p className="text-white text-sm font-light text-center md:text-left">Preciso. Innovador.</p>
+    <video
+      src="/out8.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="w-[200px] h-[100px] rounded-md object-cover"
+    />
+    <p className="text-white text-sm font-light text-center md:text-left">Futurista. Expresivo.</p>
+  </div>
+</div>
       </div>
     </section>
   );
