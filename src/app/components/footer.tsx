@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Image from 'next/image'; // Importa el componente Image de Next.js
 
 export default function Footer() {
@@ -23,6 +23,13 @@ export default function Footer() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  // Función para abrir WhatsApp
+  const openWhatsApp = () => {
+    const phoneNumber = '525532059514'; // Número con lada de México
+    const url = `https://wa.me/${phoneNumber}`;
+    window.open(url, '_blank');
+  };
 
   return (
     <div className="relative rounded-t-[30px] bg-[#000000] flex justify-center items-center min-h-[600px]">
@@ -61,21 +68,39 @@ export default function Footer() {
         {/* Contenedor inferior con CTA, redes sociales y copyright */}
         <div className="relative z-20 flex flex-col md:flex-row items-center justify-between mt-auto space-y-6 md:space-y-0 pb-0">
           {/* CTA */}
-          <button className="bg-black text-[white] px-6 py-3 rounded-full text-lg font-semibold transition duration-300 hover:bg-white hover:text-black">
+          <button
+            onClick={openWhatsApp}
+            className="bg-black text-[white] px-6 py-3 rounded-full text-lg font-semibold transition duration-300 hover:bg-white hover:text-black"
+          >
             Diseña tu futuro
           </button>
 
           {/* Botones de redes sociales */}
           <div className="flex space-x-4">
-            <div className="w-12 h-12 flex items-center justify-center bg-black rounded-full hover:bg-blue-500 transition duration-300">
+            <a
+              href="https://www.facebook.com/profile.php?id=100086632694397"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 flex items-center justify-center bg-black rounded-full hover:bg-blue-500 transition duration-300"
+            >
               <FaFacebook className="text-white text-2xl" />
-            </div>
-            <div className="w-12 h-12 flex items-center justify-center bg-black rounded-full hover:bg-blue-500 transition duration-300">
-              <FaTwitter className="text-white text-2xl" />
-            </div>
-            <div className="w-12 h-12 flex items-center justify-center bg-black rounded-full hover:bg-blue-500 transition duration-300">
+            </a>
+            <a
+              href="https://www.linkedin.com/in/ignacio-adrian-morfin-sanchez-718280207/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 flex items-center justify-center bg-black rounded-full hover:bg-blue-500 transition duration-300"
+            >
+              <FaLinkedin className="text-white text-2xl" />
+            </a>
+            <a
+              href="https://www.instagram.com/uxui.adrian"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 flex items-center justify-center bg-black rounded-full hover:bg-blue-500 transition duration-300"
+            >
               <FaInstagram className="text-white text-2xl" />
-            </div>
+            </a>
           </div>
 
           {/* Copyright */}

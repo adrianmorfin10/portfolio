@@ -120,26 +120,16 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          {/* Menú derecho (contacto y proyectos) */}
+          {/* Menú derecho (solo el botón de contacto) */}
           <motion.div
-            className="bg-black flex flex-row items-center justify-center rounded-3xl p-2 text-white w-full hidden sm:block"
+            className="bg-black flex flex-row items-center justify-center rounded-3xl min-h[20px] p-2 text-white w-full hidden sm:block"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <ul className="flex flex-row space-x-10">
-              <li>
-                <a href="#acerca-de" className="hover-effect relative">
-                  Acerca de
-                </a>
-              </li>
+            <ul className="flex flex-row space-x-10 ">
               <li>
                 <a href="#contacto" className="hover-effect relative">
-                  Contacto
-                </a>
-              </li>
-              <li>
-                <a href="#proyectos" className="hover-effect relative">
-                  Proyectos
+                  
                 </a>
               </li>
             </ul>

@@ -20,7 +20,7 @@ const projects: Project[] = [
   {
     id: 1,
     title: "Black Pay",
-    description: "Participé como Product Designer y Product Owner...",
+    description: "Participé como Product Designer en el desarrollo de las interfases de la aplicacion mobile y web y lideré el desarrollo de la aplicacion mobile para USA y MX el despliegue correcto del lanzamiento de la APP",
     roles: ["Product Designer", "Product Owner"],
     cta: "Ver Proyecto",
     media: {
@@ -29,20 +29,20 @@ const projects: Project[] = [
     },
   },
   {
-    id: 2,
-    title: "Agenda",
-    description: "Creé desde 0 una aplicación para agendamiento...",
-    roles: ["Diseñador UX/UI", "Desarrollador Frontend"],
-    media: {
-      video: "/out2.mp4",
-      images: ["/agenda1.png", "/agenda2.png"],
-    },
+    "id": 2,
+    "title": "Agenda",
+    "description": "Aplicación integral para agendamiento, gestión de ventas y reportería con IA, desarrollada desde cero como freelance. Incluye diseño UX/UI (branding, tipografías), levantamiento de requerimientos, planificación, desarrollo frontend y estructuración de base de datos. Gestioné el producto como Product Owner y resolví bugs hasta la entrega final.",
+    "roles": ["Diseñador UX/UI", "Desarrollador Frontend", "Product Owner"],
+    "media": {
+      "video": "/out2.mp4",
+      "images": ["/agenda1.png", "/agenda2.png"]
+    }
   },
   {
     id: 3,
     title: "Coinsturn",
-    description: "Desarrollé una plataforma de intercambio de criptomonedas...",
-    roles: ["Desarrollador Fullstack", "Diseñador UX/UI"],
+    description: "Proyecto en el que desarrolle habilidades como backend y front end posterior a realizar el desarrollo de la aplicacion para que los clientes visualizaran sus inversiones, integrando nuevas funcionalidades como un simulador en todas las estapas participe en el reasearch, diseño, porototipado, desarrollo y puesta en marcha de funcionalidades del producto",
+    roles: ["Head of product","Desarrollador Fullstack", "Diseñador UX/UI","Desarrollador backend"],
     cta: "Ver Proyecto",
     media: {
       video: "/out6.mp4",
