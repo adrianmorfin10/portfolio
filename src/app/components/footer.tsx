@@ -52,7 +52,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="relative rounded-t-[30px] bg-[#000000] flex justify-center items-center min-h-[600px]">
+    <div className="relative bg-[#000000] flex justify-center items-center min-h-[600px]">
       <footer
         ref={footerRef}
         className="bg-black rounded-2xl p-12 text-center mt-10 relative overflow-hidden w-full max-w-5xl flex flex-col justify-between min-h-[500px]"
