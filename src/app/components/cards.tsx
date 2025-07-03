@@ -41,7 +41,7 @@ const services = [
     description: "Domina el diseño de experiencias digitales",
     price: "Próximamente",
     features: ["Duración: 6 meses", "Proyectos reales", "Mentorías 1:1", "Portafolio profesional", "Certificación internacional"],
-    duration: "Inicio: Enero 2024",
+    duration: "Inicio: Enero 2026",
     comingSoon: true,
     position: "left-top"
   },
