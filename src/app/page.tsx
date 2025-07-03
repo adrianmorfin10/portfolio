@@ -10,9 +10,6 @@ import Websites from './components/websites';
 import Brandings from './components/brandings';
 
 export default function Home() {
-  
-  ;
-
   return (
     <div>
       <Hero />
