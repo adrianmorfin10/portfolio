@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 
 const websites = [
@@ -19,7 +19,7 @@ const websites = [
     preview: "/luhn.png",
     demo: "/luhn.mp4",
     description: "Plataforma de IA financiera",
-    features: ["Colaborativo" ]
+    features: ["Colaborativo"]
   },
   {
     title: "Duo Talent",
@@ -28,12 +28,65 @@ const websites = [
     demo: "/duo.mp4",
     description: "Agencia de talento digital",
     features: ["Branding", "Sitio Web", "UI/UX"]
+  },
+  {
+    title: "KOBA",
+    url: "https://www.kobamx.com/",
+    preview: "/koba.png",
+    demo: "/koba.mp4",
+    description: "Marca de ropa Fitness",
+    features: ["Branding", "Sitio Web", "UI/UX"]
   }
 ];
 
 export default function Websites() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const handleCardHover = useCallback((index: number) => {
+    if (window.innerWidth <= 768) return;
+
+    setHoveredIndex(index);
+    
+    if (!containerRef.current || !cardsRef.current[index]) return;
+
+    const container = containerRef.current;
+    const card = cardsRef.current[index];
+    if (!card) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const cardWidth = cardRect.width;
+    const cardLeft = cardRect.left - containerRect.left;
+    const cardRight = cardRect.right - containerRect.left;
+    const containerWidth = containerRect.width;
+
+    let targetScroll = container.scrollLeft;
+    
+    if (cardRight > containerWidth) {
+      targetScroll = container.scrollLeft + (cardRight - containerWidth) + 24;
+    } 
+    else if (cardLeft < 0) {
+      targetScroll = container.scrollLeft + cardLeft - 24;
+    }
+    else if (cardWidth > containerWidth) {
+      targetScroll = cardLeft - ((containerWidth - cardWidth) / 2);
+    }
+
+    container.scrollTo({
+      left: targetScroll,
+      behavior: 'smooth'
+    });
+  }, []);
+
+  const handleContainerMouseLeave = useCallback(() => {
+    setHoveredIndex(null);
+  }, []);
+
+  const setCardRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
+    cardsRef.current[index] = el;
+  }, []);
 
   return (
     <section className="relative bg-[#000000] py-20 overflow-hidden">
@@ -53,23 +106,34 @@ export default function Websites() {
 
         <div 
           ref={containerRef}
-          className="relative pb-8 -mx-4 overflow-x-auto overflow-y-hidden"
+          className="relative pb-8 -mx-4 overflow-x-auto overflow-y-hidden scroll-smooth"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}
+          onMouseLeave={handleContainerMouseLeave}
         >
+          <style jsx>{`
+            .overflow-x-auto::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+          
           <div className="flex px-4 space-x-6 w-max">
             {websites.map((site, index) => (
               <motion.div
                 key={index}
+                ref={setCardRef(index)}
                 className="flex-shrink-0 relative"
                 initial={{ width: 300 }}
                 animate={{
                   width: hoveredIndex === index && window.innerWidth > 768 ? 600 : 300
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                onHoverStart={() => window.innerWidth > 768 && setHoveredIndex(index)}
+                onHoverStart={() => handleCardHover(index)}
                 onHoverEnd={() => window.innerWidth > 768 && setHoveredIndex(null)}
               >
                 <div className="h-full bg-[#000000] rounded-2xl overflow-hidden border border-gray-800 flex flex-col">
-                  {/* Contenido estático */}
                   <div className="relative h-40 overflow-hidden">
                     <Image
                       src={site.preview}
@@ -95,7 +159,6 @@ export default function Websites() {
                       ))}
                     </div>
 
-                    {/* CTA para móvil (siempre visible) */}
                     <a
                       href={site.url}
                       target="_blank"
@@ -119,7 +182,6 @@ export default function Websites() {
                     </a>
                   </div>
 
-                  {/* Overlay de video (solo desktop) */}
                   {hoveredIndex === index && (
                     <motion.div 
                       className="absolute inset-0 hidden md:block"
@@ -137,7 +199,6 @@ export default function Websites() {
                         <source src={site.demo} type="video/mp4" />
                       </video>
                       
-                      {/* CTA para desktop */}
                       <div className="absolute bottom-4 right-4">
                         <motion.a
                           href={site.url}
@@ -162,7 +223,7 @@ export default function Websites() {
                             strokeLinejoin="round"
                             initial={{ rotate: 0 }}
                             whileHover={{
-                              rotate: -45, // Cambiado a -45 para que apunte arriba
+                              rotate: -45,
                               transition: { 
                                 type: "spring",
                                 stiffness: 500,
@@ -180,6 +241,19 @@ export default function Websites() {
               </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* CTA Simple para WhatsApp */}
+        <div className="text-center mt-12">
+          <a
+            href="https://wa.me/525532059514?text=Requiero%20cotización%20para%20mi%20sitio%20web"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors whitespace-nowrap"
+          >
+            ¡Quiero mi sitio web! 
+          </a>
+        
         </div>
       </div>
     </section>
