@@ -11,7 +11,7 @@ import Brandings from './components/brandings';
 
 export default function Home() {
   
-  [];
+  ;
 
   return (
     <div>
