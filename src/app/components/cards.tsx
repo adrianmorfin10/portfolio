@@ -72,7 +72,7 @@ export default function ServiciosCards() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Nuestros Servicios</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Servicios</h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Soluciones digitales completas diseñadas para impulsar tu negocio
             </p>
@@ -188,6 +188,32 @@ export default function ServiciosCards() {
           </motion.div>
         </div>
       </section>
+
+      {/* Estilos para deshabilitar hover en móviles */}
+      <style jsx global>{`
+        @media (hover: none) {
+          .group:hover .group-hover\:bg-transparent,
+          .group:hover .group-hover\:text-white,
+          .group:hover .group-hover\:text-blue-100,
+          .group:hover .group-hover\:bg-blue-500,
+          .group:hover .group-hover\:text-blue-200,
+          .group:hover .group-hover\:bg-gray-100,
+          .group:hover .group-hover\:text-gray-800,
+          .group:hover .group-hover\:bg-white,
+          .group:hover .group-hover\:text-blue-600,
+          .group:hover .group-hover\:bg-gray-300,
+          .group:hover .group-hover\:text-gray-700 {
+            background-color: inherit !important;
+            color: inherit !important;
+          }
+          
+          .hover\:shadow-md:hover,
+          .hover\:bg-blue-700:hover {
+            box-shadow: none !important;
+            background-color: rgb(37 99 235) !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

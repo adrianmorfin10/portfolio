@@ -22,6 +22,15 @@ export default {
         "grey-dark": "var(--c-grey-dark)",
         "grey-dark-rgb": "rgb(var(--c-grey-dark-rgb))",
       },
+      fontFamily: {
+        'bungee': ['"Bungee"', 'cursive'],
+        'rubik-mono': ['"Rubik Mono One"', 'sans-serif'],
+        'tilt-prism': ['"Tilt Prism"', 'sans-serif'],
+        'major-mono': ['"Major Mono Display"', 'monospace'],
+        'syne-tactile': ['"Syne Tactile"', 'cursive'],
+        'amita': ['"Amita"', 'cursive'],
+        'noto-sans-jp': ['"Noto Sans JP"', 'sans-serif'] // Para kanjis
+      },
     },
   },
   plugins: [],

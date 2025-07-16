@@ -8,13 +8,15 @@ const brandings = [
     title: "KOBA",
     description: "Marca de ropa fitness premium",
     features: ["Branding", "Packaging", "Identidad Visual"],
-    image: "/kobadesk.jpg" // Usamos solo la versión vertical
+    image: "/kobadesk.jpg",
+    mobileImage: "/kobamob.jpg" // Imagen alternativa para móviles
   },
   {
     title: "Camaron con Limon",
     description: "Restaurante de mariscos gourmet",
     features: ["Branding", "Señalética", "Menú Digital"],
-    image: "/camarondesk.jpg" // Usamos solo la versión vertical
+    image: "/camarondesk.jpg",
+    mobileImage: "/camaronmob.jpg" // Imagen alternativa para móviles
   }
 ];
 
@@ -45,16 +47,33 @@ export default function Brandings() {
               viewport={{ once: true, margin: "-100px" }}
               className="w-full max-w-[80rem] bg-[#000000] rounded-2xl overflow-hidden"
             >
-              {/* Imagen vertical */}
-              <div className="relative h-[500px] w-full overflow-hidden">
-                <Image
-                  src={brand.image}
-                  alt={`Proyecto de branding para ${brand.title} - ${brand.description}`}
-                  fill
-                  className="object-cover"
-                  quality={90}
-                  priority={index < 2}
-                />
+              {/* Contenedor de imagen responsivo */}
+              <div className="relative w-full aspect-[3/4] md:aspect-[16/9] overflow-hidden">
+                {/* Imagen para móviles (vertical) */}
+                <div className="md:hidden w-full h-full">
+                  <Image
+                    src={brand.mobileImage || brand.image}
+                    alt={`Proyecto de branding para ${brand.title}`}
+                    fill
+                    className="object-cover"
+                    quality={90}
+                    priority={index < 2}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                
+                {/* Imagen para desktop (horizontal) */}
+                <div className="hidden md:block w-full h-full">
+                  <Image
+                    src={brand.image}
+                    alt={`Proyecto de branding para ${brand.title}`}
+                    fill
+                    className="object-cover"
+                    quality={90}
+                    priority={index < 2}
+                    sizes="(max-width: 1200px) 100vw, 80vw"
+                  />
+                </div>
               </div>
               
               {/* Contenido con CTA */}

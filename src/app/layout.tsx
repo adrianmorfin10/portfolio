@@ -24,6 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Añade estas fuentes */}
+        <link href="https://fonts.googleapis.com/css2?family=Amita&family=Bungee&family=Major+Mono+Display&family=Rubik+Mono+One&family=Syne+Tactile&family=Tilt+Prism&display=swap" rel="stylesheet" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
