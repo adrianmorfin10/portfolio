@@ -7,7 +7,7 @@ const services = [
   {
     title: "Páginas Web Profesionales",
     description: "Sitios web rápidos, modernos y optimizados para SEO",
-    price: "Desde $5,000 MXN",
+   
     features: ["Diseño 100% responsive", "Optimización SEO básica", "Formulario de contacto", "Hosting + Dominio (1 año)", "Soporte técnico 30 días"],
     duration: "2-3 semanas",
     position: "left-top"
@@ -15,7 +15,7 @@ const services = [
   {
     title: "Tiendas Online (E-commerce)",
     description: "Plataforma completa para vender tus productos",
-    price: "Desde $15,000 MXN",
+   
     features: ["Hasta 50 productos", "Pasarela de pagos integrada", "Carrito de compras", "Panel administrativo", "Soporte técnico 60 días"],
     duration: "4-5 semanas",
     position: "right-top"
@@ -23,7 +23,7 @@ const services = [
   {
     title: "Aplicaciones Web Personalizadas",
     description: "Software a medida para tu negocio",
-    price: "Desde $25,000 MXN",
+   
     features: ["Desarrollo customizado", "Autenticación de usuarios", "Base de datos segura", "Panel de administración", "Soporte técnico 90 días"],
     duration: "6-8 semanas",
     position: "left-bottom"
@@ -31,7 +31,7 @@ const services = [
   {
     title: "Branding & Identidad Visual",
     description: "Diseño profesional de marca",
-    price: "Desde $8,000 MXN",
+   
     features: ["Diseño de logo profesional", "Paleta de colores corporativa", "Sistema tipográfico", "Manual de identidad", "Archivos editables"],
     duration: "3-4 semanas",
     position: "right-bottom"
@@ -48,7 +48,7 @@ const services = [
   {
     title: "Consultoría Especializada",
     description: "Asesoría personalizada para tu proyecto",
-    price: "$2,500 MXN/hora",
+  
     features: ["Análisis detallado", "Optimización de performance", "Prototipado interactivo", "Estrategia digital", "Sesiones prácticas"],
     duration: "Flexible",
     position: "right-top"
