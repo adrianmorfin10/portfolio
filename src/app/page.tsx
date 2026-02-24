@@ -10,6 +10,7 @@ import Cards from './components/cards';
 import Websites from './components/websites';
 import Brandings from './components/brandings';
 import LoadingAnimation from './components/LoadingAnimation';
+import { FcRotateToPortrait } from 'react-icons/fc';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);

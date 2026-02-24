@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 
 const websites = [
@@ -20,6 +20,15 @@ const websites = [
     demo: "/luhn.mp4",
     description: "Plataforma de IA financiera",
     features: ["Colaborativo"]
+  },
+  {
+    title: "Vértice",
+    url: "https://www.verticemineria.com",
+    preview: "/vertice.png",
+    demo: "/vertice_full.mp4",
+    demoCompressed: "/vertice_comp.mp4",
+    description: "Sitio web para empresa de minería",
+    features: ["Branding", "Sitio Web", "UI/UX", "Optimización"]
   },
   {
     title: "Duo Talent",
@@ -41,14 +50,28 @@ const websites = [
 
 export default function Websites() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [loadedVideos, setLoadedVideos] = useState<{ [key: number]: boolean }>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
+
+  const handleVideoLoad = useCallback((index: number) => {
+    setLoadedVideos(prev => ({ ...prev, [index]: true }));
+  }, []);
 
   const handleCardHover = useCallback((index: number) => {
     if (window.innerWidth <= 768) return;
 
     setHoveredIndex(index);
     
+    // Preload full video when hovering over Vértice
+    if (index === 2 && !loadedVideos[2]) {
+      const fullVideo = videoRefs.current[2];
+      if (fullVideo) {
+        fullVideo.load();
+      }
+    }
+
     if (!containerRef.current || !cardsRef.current[index]) return;
 
     const container = containerRef.current;
@@ -78,7 +101,7 @@ export default function Websites() {
       left: targetScroll,
       behavior: 'smooth'
     });
-  }, []);
+  }, [loadedVideos]);
 
   const handleContainerMouseLeave = useCallback(() => {
     setHoveredIndex(null);
@@ -86,6 +109,10 @@ export default function Websites() {
 
   const setCardRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
     cardsRef.current[index] = el;
+  }, []);
+
+  const setVideoRef = useCallback((index: number) => (el: HTMLVideoElement | null) => {
+    videoRefs.current[index] = el;
   }, []);
 
   return (
@@ -188,16 +215,52 @@ export default function Websites() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                     >
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover"
-                        preload="none"
-                      >
-                        <source src={site.demo} type="video/mp4" />
-                      </video>
+                      {/* Video con carga progresiva para Vértice */}
+                      {site.demoCompressed ? (
+                        <>
+                          {/* Video comprimido - se muestra primero */}
+                          <video
+                            key={`${index}-compressed`}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
+                            preload="none"
+                            onLoadedData={() => handleVideoLoad(index)}
+                          >
+                            <source src={site.demoCompressed} type="video/mp4" />
+                          </video>
+                          
+                          {/* Video full - se carga en segundo plano y reemplaza al comprimido cuando esté listo */}
+                          {loadedVideos[index] && (
+                            <video
+                              ref={setVideoRef(index)}
+                              key={`${index}-full`}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-full h-full object-cover absolute inset-0"
+                              preload="none"
+                            >
+                              <source src={site.demo} type="video/mp4" />
+                            </video>
+                          )}
+                        </>
+                      ) : (
+                        /* Video normal para los demás websites */
+                        <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover"
+                          preload="none"
+                        >
+                          <source src={site.demo} type="video/mp4" />
+                        </video>
+                      )}
                       
                       <div className="absolute bottom-4 right-4">
                         <motion.a
@@ -253,7 +316,6 @@ export default function Websites() {
           >
             ¡Quiero mi sitio web! 
           </a>
-        
         </div>
       </div>
     </section>
