@@ -6,11 +6,10 @@ import Projects from './components/projects';
 import Footer from './components/footer';
 import Section from './components/section';
 import Tools from './components/tools';
-import Cards from './components/cards';
 import Websites from './components/websites';
 import Brandings from './components/brandings';
 import LoadingAnimation from './components/LoadingAnimation';
-import { FcRotateToPortrait } from 'react-icons/fc';
+
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +23,6 @@ export default function Home() {
           <Hero />
           <Section />
           <Tools />
-          <Cards />
           <Projects />
           <Websites />
           <Brandings />
