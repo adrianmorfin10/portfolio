@@ -4,51 +4,101 @@ import { motion } from "framer-motion";
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 
-const websites = [
-  {
-    title: "QC Signs",
-    url: "https://www.qcssigns.com",
-    preview: "/qcs.png",
-    demo: "/qcs.mp4",
-    description: "E-commerce para señalética industrial",
-    features: ["Sitio Web", "E-commerce", "Animación"]
-  },
-  {
-    title: "Luhn AI",
-    url: "https://www.luhn.ai/about",
-    preview: "/luhn.png",
-    demo: "/luhn.mp4",
-    description: "Plataforma de IA financiera",
-    features: ["Colaborativo"]
-  },
-  {
-    title: "Vértice",
-    url: "https://www.verticemineria.com",
-    preview: "/vertice.png",
-    demo: "/vertice_full.mp4",
-    demoCompressed: "/vertice_comp.mp4",
-    description: "Sitio web para empresa de minería",
-    features: ["Branding", "Sitio Web", "UI/UX", "Optimización"]
-  },
-  {
-    title: "Duo Talent",
-    url: "https://www.duotalent.agency/",
-    preview: "/duo.png",
-    demo: "/duo.mp4",
-    description: "Agencia de talento digital",
-    features: ["Branding", "Sitio Web", "UI/UX"]
-  },
-  {
-    title: "KOBA",
-    url: "https://www.kobamx.com/",
-    preview: "/koba.png",
-    demo: "/koba.mp4",
-    description: "Marca de ropa Fitness",
-    features: ["Branding", "Sitio Web", "UI/UX"]
-  }
-];
+interface WebsitesProps {
+  lang: 'es' | 'en';
+}
 
-export default function Websites() {
+const websitesData = {
+  es: [
+    {
+      title: "QC Signs",
+      url: "https://www.qcssigns.com",
+      preview: "/qcs.png",
+      demo: "/qcs.mp4",
+      description: "E-commerce para señalética industrial",
+      features: ["Sitio Web", "E-commerce", "Animación"]
+    },
+    {
+      title: "Luhn AI",
+      url: "https://www.luhn.ai/about",
+      preview: "/luhn.png",
+      demo: "/luhn.mp4",
+      description: "Plataforma de IA financiera",
+      features: ["Colaborativo"]
+    },
+    {
+      title: "Vértice",
+      url: "https://www.verticemineria.com",
+      preview: "/vertice.png",
+      demo: "/vertice_full.mp4",
+      demoCompressed: "/vertice_comp.mp4",
+      description: "Sitio web para empresa de minería",
+      features: ["Branding", "Sitio Web", "UI/UX", "Optimización"]
+    },
+    {
+      title: "Duo Talent",
+      url: "https://www.duotalent.agency/",
+      preview: "/duo.png",
+      demo: "/duo.mp4",
+      description: "Agencia de talento digital",
+      features: ["Branding", "Sitio Web", "UI/UX"]
+    },
+    {
+      title: "KOBA",
+      url: "https://www.kobamx.com/",
+      preview: "/koba.png",
+      demo: "/koba.mp4",
+      description: "Marca de ropa Fitness",
+      features: ["Branding", "Sitio Web", "UI/UX"]
+    }
+  ],
+  en: [
+    {
+      title: "QC Signs",
+      url: "https://www.qcssigns.com",
+      preview: "/qcs.png",
+      demo: "/qcs.mp4",
+      description: "E-commerce for industrial signage",
+      features: ["Website", "E-commerce", "Animation"]
+    },
+    {
+      title: "Luhn AI",
+      url: "https://www.luhn.ai/about",
+      preview: "/luhn.png",
+      demo: "/luhn.mp4",
+      description: "Financial AI platform",
+      features: ["Collaborative"]
+    },
+    {
+      title: "Vértice",
+      url: "https://www.verticemineria.com",
+      preview: "/vertice.png",
+      demo: "/vertice_full.mp4",
+      demoCompressed: "/vertice_comp.mp4",
+      description: "Website for mining company",
+      features: ["Branding", "Website", "UI/UX", "Optimization"]
+    },
+    {
+      title: "Duo Talent",
+      url: "https://www.duotalent.agency/",
+      preview: "/duo.png",
+      demo: "/duo.mp4",
+      description: "Digital talent agency",
+      features: ["Branding", "Website", "UI/UX"]
+    },
+    {
+      title: "KOBA",
+      url: "https://www.kobamx.com/",
+      preview: "/koba.png",
+      demo: "/koba.mp4",
+      description: "Fitness clothing brand",
+      features: ["Branding", "Website", "UI/UX"]
+    }
+  ]
+};
+
+export default function Websites({ lang }: WebsitesProps) {
+  const websites = websitesData[lang];
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [loadedVideos, setLoadedVideos] = useState<{ [key: number]: boolean }>({});
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,15 +111,11 @@ export default function Websites() {
 
   const handleCardHover = useCallback((index: number) => {
     if (window.innerWidth <= 768) return;
-
     setHoveredIndex(index);
     
-    // Preload full video when hovering over Vértice
     if (index === 2 && !loadedVideos[2]) {
       const fullVideo = videoRefs.current[2];
-      if (fullVideo) {
-        fullVideo.load();
-      }
+      if (fullVideo) fullVideo.load();
     }
 
     if (!containerRef.current || !cardsRef.current[index]) return;
@@ -80,40 +126,25 @@ export default function Websites() {
 
     const containerRect = container.getBoundingClientRect();
     const cardRect = card.getBoundingClientRect();
-    const cardWidth = cardRect.width;
     const cardLeft = cardRect.left - containerRect.left;
     const cardRight = cardRect.right - containerRect.left;
     const containerWidth = containerRect.width;
-
     let targetScroll = container.scrollLeft;
     
     if (cardRight > containerWidth) {
       targetScroll = container.scrollLeft + (cardRight - containerWidth) + 24;
-    } 
-    else if (cardLeft < 0) {
+    } else if (cardLeft < 0) {
       targetScroll = container.scrollLeft + cardLeft - 24;
-    }
-    else if (cardWidth > containerWidth) {
-      targetScroll = cardLeft - ((containerWidth - cardWidth) / 2);
+    } else if (cardRect.width > containerWidth) {
+      targetScroll = cardLeft - ((containerWidth - cardRect.width) / 2);
     }
 
-    container.scrollTo({
-      left: targetScroll,
-      behavior: 'smooth'
-    });
+    container.scrollTo({ left: targetScroll, behavior: 'smooth' });
   }, [loadedVideos]);
 
-  const handleContainerMouseLeave = useCallback(() => {
-    setHoveredIndex(null);
-  }, []);
-
-  const setCardRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
-    cardsRef.current[index] = el;
-  }, []);
-
-  const setVideoRef = useCallback((index: number) => (el: HTMLVideoElement | null) => {
-    videoRefs.current[index] = el;
-  }, []);
+  const handleContainerMouseLeave = useCallback(() => setHoveredIndex(null), []);
+  const setCardRef = useCallback((index: number) => (el: HTMLDivElement | null) => { cardsRef.current[index] = el; }, []);
+  const setVideoRef = useCallback((index: number) => (el: HTMLVideoElement | null) => { videoRefs.current[index] = el; }, []);
 
   return (
     <section className="relative bg-[#000000] py-20 overflow-hidden">
@@ -125,25 +156,24 @@ export default function Websites() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Sitios Web Realizados</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            {lang === 'es' ? 'Sitios Web Realizados' : 'Websites Made'}
+          </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Experiencias digitales que combinan diseño y funcionalidad
+            {lang === 'es' 
+              ? 'Experiencias digitales que combinan diseño y funcionalidad'
+              : 'Digital experiences combining design and functionality'}
           </p>
         </motion.div>
 
         <div 
           ref={containerRef}
           className="relative pb-8 -mx-4 overflow-x-auto overflow-y-hidden scroll-smooth"
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
-          }}
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           onMouseLeave={handleContainerMouseLeave}
         >
           <style jsx>{`
-            .overflow-x-auto::-webkit-scrollbar {
-              display: none;
-            }
+            .overflow-x-auto::-webkit-scrollbar { display: none; }
           `}</style>
           
           <div className="flex px-4 space-x-6 w-max">
@@ -177,10 +207,7 @@ export default function Websites() {
                     
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {site.features.map((feature, i) => (
-                        <span 
-                          key={i}
-                          className="px-3 py-1 bg-gray-500/20 text-white-400 rounded-full text-sm"
-                        >
+                        <span key={i} className="px-3 py-1 bg-gray-500/20 text-white rounded-full text-sm">
                           {feature}
                         </span>
                       ))}
@@ -192,18 +219,8 @@ export default function Websites() {
                       rel="noopener noreferrer"
                       className="md:hidden mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition"
                     >
-                      <span>Visitar sitio</span>
-                      <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="3" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                      >
+                      <span>{lang === 'es' ? 'Visitar sitio' : 'Visit site'}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                       </svg>
                     </a>
@@ -215,32 +232,22 @@ export default function Websites() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                     >
-                      {/* Video con carga progresiva para Vértice */}
                       {site.demoCompressed ? (
                         <>
-                          {/* Video comprimido - se muestra primero */}
                           <video
                             key={`${index}-compressed`}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
+                            autoPlay loop muted playsInline
                             className="w-full h-full object-cover"
                             preload="none"
                             onLoadedData={() => handleVideoLoad(index)}
                           >
                             <source src={site.demoCompressed} type="video/mp4" />
                           </video>
-                          
-                          {/* Video full - se carga en segundo plano y reemplaza al comprimido cuando esté listo */}
                           {loadedVideos[index] && (
                             <video
                               ref={setVideoRef(index)}
                               key={`${index}-full`}
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
+                              autoPlay loop muted playsInline
                               className="w-full h-full object-cover absolute inset-0"
                               preload="none"
                             >
@@ -249,15 +256,7 @@ export default function Websites() {
                           )}
                         </>
                       ) : (
-                        /* Video normal para los demás websites */
-                        <video
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="w-full h-full object-cover"
-                          preload="none"
-                        >
+                        <video autoPlay loop muted playsInline className="w-full h-full object-cover" preload="none">
                           <source src={site.demo} type="video/mp4" />
                         </video>
                       )}
@@ -268,31 +267,13 @@ export default function Websites() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors"
-                          whileHover={{
-                            x: 4,
-                            transition: { type: "spring", stiffness: 500 }
-                          }}
+                          whileHover={{ x: 4, transition: { type: "spring", stiffness: 500 } }}
                         >
-                          <span>Ver demo</span>
+                          <span>{lang === 'es' ? 'Ver demo' : 'View demo'}</span>
                           <motion.svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"
                             initial={{ rotate: 0 }}
-                            whileHover={{
-                              rotate: -45,
-                              transition: { 
-                                type: "spring",
-                                stiffness: 500,
-                                damping: 15
-                              }
-                            }}
+                            whileHover={{ rotate: -45, transition: { type: "spring", stiffness: 500, damping: 15 } }}
                           >
                             <path d="M5 12h14M12 19l7-7-7-7"/>
                           </motion.svg>
@@ -306,16 +287,16 @@ export default function Websites() {
           </div>
         </div>
 
-        {/* CTA Simple para WhatsApp */}
+        {/* CTA WhatsApp */}
         <div className="text-center mt-12">
-          <a
+        {/* <a
             href="https://wa.me/525532059514?text=Requiero%20cotización%20para%20mi%20sitio%20web"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors whitespace-nowrap"
           >
-            ¡Quiero mi sitio web! 
-          </a>
+            {lang === 'es' ? '¡Quiero mi sitio web!' : 'I want my website!'}
+          </a>*/}
         </div>
       </div>
     </section>

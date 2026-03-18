@@ -4,11 +4,19 @@ import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export default function Hero() {
+interface HeroProps {
+  lang: 'es' | 'en';
+}
+
+export default function Hero({ lang }: HeroProps) {
   const words = useMemo(
-    () => ["Diseño", "Producto", "Programación", "Innovación", "Creatividad"],
+    () => ({
+      es: ["Diseño", "Producto", "Programación", "Innovación", "Creatividad"],
+      en: ["Design", "Product", "Coding", "Innovation", "Creativity"]
+    }),
     []
   );
+
   const [displayText, setDisplayText] = useState("");
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -16,7 +24,7 @@ export default function Hero() {
   const delayBetweenWords = 1500;
 
   useEffect(() => {
-    const currentWord = words[currentWordIndex];
+    const currentWord = words[lang][currentWordIndex];
     let timeout: NodeJS.Timeout;
 
     if (!isDeleting) {
@@ -36,19 +44,18 @@ export default function Hero() {
         }, typingSpeed / 2);
       } else {
         setIsDeleting(false);
-        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        setCurrentWordIndex((prev) => (prev + 1) % words[lang].length);
       }
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, currentWordIndex, isDeleting, words]);
+  }, [displayText, currentWordIndex, isDeleting, lang, words]);
 
   return (
     <section className="relative bg-white overflow-hidden">
       {/* Fondo con manchas negras en movimiento */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-[200%] h-[200%] animate-moveBackground">
-          {/* Manchas negras */}
           <div className="absolute w-60 h-60 bg-black rounded-full top-1/4 left-1/4 animate-float blur-2xl"></div>
           <div className="absolute w-80 h-80 bg-black rounded-full top-1/2 left-1/2 animate-float blur-2xl"></div>
           <div className="absolute w-100 h-100 bg-black rounded-full top-3/4 left-3/4 animate-float blur-2xl"></div>
@@ -60,7 +67,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Contenedor con efecto de glassmorfismo */}
+      {/* Capa de glassmorfismo */}
       <div className="absolute inset-0 backdrop-blur-2xl bg-white/20"></div>
 
       {/* Contenedor principal */}
@@ -72,7 +79,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Menú izquierdo (nombre y roles) */}
+          {/* Menú izquierdo */}
           <motion.div
             className="w-full flex flex-row items-start bg-black rounded-3xl"
             whileHover={{ scale: 1.02 }}
@@ -83,7 +90,9 @@ export default function Hero() {
               <p className="text-xl mt-2 font-bold">デジタルデザイン</p>
             </div>
             <div className="bg-black rounded-3xl p-2 text-white w-full">
-              <p className="text-md mt-2">Product Designer / Head of Product</p>
+              <p className="text-md mt-2">
+                {lang === 'es' ? 'Product Designer' : 'Product Designer'}
+              </p>
             </div>
           </motion.div>
 
@@ -91,20 +100,16 @@ export default function Hero() {
           <div className="w-full mt-4 relative hidden sm:block">
             <Image
               src="/imghero.png"
-              alt="Imagen Hero"
+              alt="Hero"
               className="w-full h-auto rounded-3xl"
               width={500}
               height={300}
             />
-
-            {/* Rectángulo azul horizontal con hover y backdrop-blur */}
             <div className="absolute w-[80%] h-[84px] bg-[#000000]/70 hover:translate-x-4 transition-transform duration-500 top-[172px] left-2/3 transform -translate-x-1/2 -translate-y-1/2 z-10 backdrop-blur-[10px] hidden sm:block"></div>
-
-            {/* Flecha hacia abajo más grande (oculta en móviles) */}
             <div className="absolute w-[200px] h-[200px] top-[350px] left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden sm:block">
               <Image
                 src="/flecha.png"
-                alt="Flecha hacia abajo"
+                alt="Arrow"
                 className="w-full h-full"
                 width={200}
                 height={200}
@@ -120,20 +125,10 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          {/* Menú derecho (solo el botón de contacto) */}
-          <motion.div
-            className="bg-black flex flex-row items-center justify-center rounded-3xl min-h[20px] p-2 text-white w-full hidden sm:block"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <ul className="flex flex-row space-x-10 ">
-              <li>
-                <a href="#contacto" className="hover-effect relative">
-                  
-                </a>
-              </li>
-            </ul>
-          </motion.div>
+          {/* Espacio vacío para alineación */}
+          <div className="bg-black flex flex-row items-center justify-center rounded-3xl min-h-[20px] p-2 text-white w-full hidden sm:block">
+            <ul className="flex flex-row space-x-10"></ul>
+          </div>
 
           {/* Video */}
           <motion.div
@@ -149,7 +144,6 @@ export default function Hero() {
               className="w-full h-full object-cover"
             >
               <source src="/out3.mp4" type="video/mp4" />
-              Tu navegador no soporta el elemento de video.
             </video>
           </motion.div>
         </motion.div>
