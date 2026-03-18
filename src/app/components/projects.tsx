@@ -8,8 +8,9 @@ interface Project {
   id: number;
   title: string;
   description: { es: string; en: string };
-  challenge: { es: string; en: string };
-  solution: { es: string; en: string };
+  // Reemplazamos challenge/solution por research/iteration, manteniendo outcome
+  research: { es: string; en: string };
+  iteration: { es: string; en: string };
   outcome: { es: string; en: string };
   roles: { es: string[]; en: string[] };
   media: {
@@ -30,13 +31,13 @@ const projectsData: Project[] = [
       es: "Participé en el diseño de funcionalidad crossborder y personalización UX en app financiera.",
       en: "I participated in the design of crossborder functionality and UX personalization in a financial app."
     },
-    challenge: {
-      es: "Diseñar una funcionalidad crossborder que permitiera enviar fondos desde Estados Unidos a México de manera fluida, pero con una limitación técnica: la transacción debía ser tipo 'pull' (jalar fondos desde México) en lugar de 'push' (enviar desde USA), lo que generaba fricción y falta de transparencia para el usuario. Además, la aplicación carecía de personalización: el onboarding era genérico y el menú de navegación no se adaptaba al comportamiento del usuario.",
-      en: "Design a crossborder functionality to send funds from the United States to Mexico smoothly, but with a technical limitation: the transaction had to be a 'pull' type (pull funds from Mexico) instead of 'push' (send from USA), which caused friction and lack of transparency for the user. Additionally, the app lacked personalization: onboarding was generic and the navigation menu did not adapt to user behavior."
+    research: {
+      es: "Se realizaron entrevistas contextuales con usuarios frecuentes de transferencias internacionales, identificando que la falta de transparencia en los plazos y costos era la principal barrera. Además, un análisis de uso mostró que el onboarding genérico no lograba retener usuarios. Se mapearon los journey maps para descubrir momentos de fricción.",
+      en: "Contextual interviews were conducted with frequent international transfer users, identifying that lack of transparency in timelines and costs was the main barrier. Additionally, usage analysis showed that generic onboarding failed to retain users. Journey maps were created to discover friction points."
     },
-    solution: {
-      es: "Trabajé junto al project owner para diseñar una solución híbrida: mediante comunicación entre aplicativos, logramos que la interfaz mostrara el proceso como una transferencia push tradicional, mientras que en segundo plano se ejecutaba la lógica pull. Diseñé componentes UI específicos para la transacción crossborder que comunicaban claramente los pasos y tiempos. Para la personalización, agregué preguntas estratégicas durante el onboarding (intereses financieros, frecuencia de uso) que alimentaban un motor de preferencias. Con base en ello, diseñé un home dinámico que mostraba secciones relevantes para cada usuario y un menú de navegación que se reordenaba según las funcionalidades más utilizadas.",
-      en: "I worked with the project owner to design a hybrid solution: through inter-application communication, we made the interface show the process as a traditional push transfer, while in the background the pull logic was executed. I designed specific UI components for the crossborder transaction that clearly communicated the steps and timing. For personalization, I added strategic questions during onboarding (financial interests, frequency of use) that fed a preference engine. Based on this, I designed a dynamic home screen showing relevant sections for each user and a navigation menu that reordered according to the most used functionalities."
+    iteration: {
+      es: "Se prototiparon múltiples versiones de la interfaz crossborder, iterando con usuarios para equilibrar la limitación técnica (pull) con la claridad visual. Se diseñaron componentes UI específicos y se probaron en sesiones de usabilidad remotas. Paralelamente, se iteró el onboarding añadiendo preguntas estratégicas que personalizaban el menú y la home, validando cada cambio con tests A/B.",
+      en: "Multiple versions of the crossborder interface were prototyped, iterating with users to balance the technical limitation (pull) with visual clarity. Specific UI components were designed and tested in remote usability sessions. Simultaneously, the onboarding was iterated by adding strategic questions that personalized the menu and home, validating each change with A/B tests."
     },
     outcome: {
       es: "La funcionalidad crossborder se lanzó sin fricción y con una tasa de éxito del 98% en las primeras transacciones. La retención de usuarios aumentó un 15% gracias a la experiencia personalizada, y las reseñas en la tienda de aplicaciones destacaron la facilidad de uso y la claridad del proceso.",
@@ -44,7 +45,7 @@ const projectsData: Project[] = [
     },
     roles: {
       es: ["Diseñador UX/UI", "Product Designer"],
-      en: ["UX/UI Designer", "Product Designer" ]
+      en: ["UX/UI Designer", "Product Designer"]
     },
     media: {
       video: "/blxckpa.mp4",
@@ -58,13 +59,13 @@ const projectsData: Project[] = [
       es: "Participé como Product Designer en el desarrollo de las interfaces de la aplicación mobile y web y lideré el desarrollo de la aplicación mobile para USA y MX, asegurando el despliegue correcto del lanzamiento de la APP.",
       en: "I participated as Product Designer in the development of the mobile and web application interfaces and led the development of the mobile app for USA and MX, ensuring the correct launch of the APP."
     },
-    challenge: {
-      es: "El reto era lanzar una aplicación mobile y web para un servicio de pagos en USA y México, con equipos distribuidos y plazos ajustados. La interfaz debía ser intuitiva para usuarios de ambos países, considerando diferencias culturales y regulatorias.",
-      en: "The challenge was to launch a mobile and web application for a payment service in the USA and Mexico, with distributed teams and tight deadlines. The interface had to be intuitive for users in both countries, considering cultural and regulatory differences."
+    research: {
+      es: "Se realizó investigación de campo en ambos mercados (USA y México) con entrevistas a usuarios potenciales y estudios diarios. Se identificaron diferencias en los hábitos de pago y expectativas regulatorias. Se crearon personas y escenarios de uso para guiar el diseño.",
+      en: "Field research was conducted in both markets (USA and Mexico) with potential user interviews and diary studies. Differences in payment habits and regulatory expectations were identified. Personas and usage scenarios were created to guide the design."
     },
-    solution: {
-      es: "Como Product Designer y Product Owner, lideré el diseño de las interfaces mobile y web, realizando investigación de usuarios en ambos mercados. Implementé un sistema de diseño unificado que permitía adaptaciones locales sin perder coherencia. Coordiné con desarrollo para priorizar funcionalidades críticas y asegurar el despliegue correcto en ambas regiones.",
-      en: "As Product Designer and Product Owner, I led the design of the mobile and web interfaces, conducting user research in both markets. I implemented a unified design system that allowed local adaptations without losing coherence. I coordinated with development to prioritize critical functionalities and ensure correct deployment in both regions."
+    iteration: {
+      es: "Se desarrolló un sistema de diseño unificado con variantes locales, iterando mediante revisiones cruzadas con equipos de ambos países. Se realizaron pruebas de usabilidad con prototipos interactivos, ajustando la navegación y los flujos críticos. La iteración continua permitió priorizar funcionalidades clave y corregir problemas de localización.",
+      en: "A unified design system with local variants was developed, iterating through cross-reviews with teams from both countries. Usability tests were conducted with interactive prototypes, adjusting navigation and critical flows. Continuous iteration allowed prioritizing key functionalities and fixing localization issues."
     },
     outcome: {
       es: "La aplicación se lanzó exitosamente en las fechas planeadas, con una calificación inicial de 4.5 estrellas en ambas tiendas. Las pruebas de usabilidad mostraron una curva de aprendizaje mínima.",
@@ -86,13 +87,13 @@ const projectsData: Project[] = [
       es: "Aplicación integral para agendamiento, gestión de ventas y reportería con IA, desarrollada desde cero como freelance.",
       en: "Comprehensive application for scheduling, sales management and AI reporting, developed from scratch as a freelancer."
     },
-    challenge: {
-      es: "Desarrollar una aplicación integral para agendamiento, gestión de ventas y reportería con IA, partiendo desde cero sin un equipo establecido. El principal desafío era integrar funcionalidades complejas (IA, reportería) en una interfaz sencilla para profesionales sin experiencia técnica.",
-      en: "Develop a comprehensive application for scheduling, sales management and AI reporting, starting from scratch without an established team. The main challenge was to integrate complex functionalities (AI, reporting) into a simple interface for professionals without technical experience."
+    research: {
+      es: "Se realizaron entrevistas en profundidad con profesionales independientes para comprender sus flujos de trabajo y dolores. Se detectó que la integración de IA debía ser explicativa y no una caja negra. Se analizaron herramientas existentes para identificar oportunidades de diferenciación.",
+      en: "In-depth interviews were conducted with independent professionals to understand their workflows and pain points. It was detected that AI integration needed to be explanatory and not a black box. Existing tools were analyzed to identify differentiation opportunities."
     },
-    solution: {
-      es: "Como freelance, realicé el levantamiento de requerimientos con usuarios potenciales, diseñé el branding y la UI/UX, y desarrollé el frontend. Para la IA, diseñé flujos que explicaban visualmente las predicciones y recomendaciones. Organicé la base de datos y gestioné el backlog como Product Owner, realizando pruebas continuas y corrigiendo bugs hasta la entrega final.",
-      en: "As a freelancer, I gathered requirements with potential users, designed the branding and UI/UX, and developed the frontend. For AI, I designed flows that visually explained predictions and recommendations. I organized the database and managed the backlog as Product Owner, performing continuous testing and fixing bugs until final delivery."
+    iteration: {
+      es: "Se diseñaron y prototiparon flujos que visualizaban las predicciones de IA de forma didáctica, iterando con usuarios reales en cada ciclo. Se ajustó la interfaz de reportería para priorizar la claridad sobre la cantidad de datos. El branding y la UI se refinaron mediante pruebas de percepción.",
+      en: "Flows that visualized AI predictions in a didactic way were designed and prototyped, iterating with real users in each cycle. The reporting interface was adjusted to prioritize clarity over data quantity. Branding and UI were refined through perception tests."
     },
     outcome: {
       es: "La aplicación fue adoptada por más de 50 profesionales en su primer mes, con una tasa de satisfacción del 90%. Los usuarios destacaron la facilidad para visualizar reportes y la precisión de las sugerencias de la IA.",
@@ -114,13 +115,13 @@ const projectsData: Project[] = [
       es: "Proyecto en el que desarrollé habilidades como backend y frontend, integrando nuevas funcionalidades como un simulador. Participé en research, diseño, prototipado, desarrollo y puesta en marcha.",
       en: "Project where I developed backend and frontend skills, integrating new features like a simulator. I participated in research, design, prototyping, development and launch."
     },
-    challenge: {
-      es: "Se necesitaba transformar una plataforma de visualización de inversiones en un producto más completo, con nuevas funcionalidades como un simulador de inversiones, y mejorar la experiencia de usuario para retener a los clientes existentes.",
-      en: "We needed to transform an investment visualization platform into a more complete product, with new features like an investment simulator, and improve the user experience to retain existing customers."
+    research: {
+      es: "Se realizó un descubrimiento de producto con clientes actuales para entender cómo usaban la plataforma de visualización. Se identificó la necesidad de herramientas de simulación y proyección. Se analizaron datos de uso para priorizar funcionalidades.",
+      en: "Product discovery was carried out with current clients to understand how they used the visualization platform. The need for simulation and projection tools was identified. Usage data was analyzed to prioritize functionalities."
     },
-    solution: {
-      es: "Participé en todas las etapas: desde el research con usuarios para identificar necesidades no cubiertas, hasta el diseño de prototipos y desarrollo fullstack. Implementé el simulador de inversiones con una interfaz clara que mostraba proyecciones en tiempo real. También optimicé el rendimiento del backend para soportar mayor concurrencia.",
-      en: "I participated in all stages: from user research to identify unmet needs, to prototype design and fullstack development. I implemented the investment simulator with a clear interface showing real-time projections. I also optimized backend performance to support higher concurrency."
+    iteration: {
+      es: "Se iteró sobre prototipos del simulador en conjunto con usuarios, refinando la interfaz para que las proyecciones fueran intuitivas y en tiempo real. Se realizaron pruebas de rendimiento y se optimizó el backend para soportar concurrencia. Cada iteración incluía feedback de los clientes.",
+      en: "The simulator prototypes were iterated together with users, refining the interface so that projections were intuitive and real-time. Performance tests were conducted and the backend was optimized to support concurrency. Each iteration included client feedback."
     },
     outcome: {
       es: "El simulador incrementó el tiempo de sesión promedio en un 40% y las solicitudes de asesoría en un 25%. La plataforma recibió comentarios positivos sobre la transparencia de la información.",
@@ -274,7 +275,7 @@ export default function Projects({ lang }: ProjectsProps) {
                 </motion.div>
               ))}
 
-              {/* Bloque de proceso */}
+              {/* Bloque de proceso: Research, Iteration, Outcome */}
               <motion.div
                 variants={{
                   visible: { opacity: 1, y: 0 },
@@ -283,24 +284,30 @@ export default function Projects({ lang }: ProjectsProps) {
                 transition={{ duration: 0.6, delay: 1.0 }}
                 className="md:col-span-4 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer bg-black p-6"
               >
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="font-semibold text-berry">
-                      {lang === 'es' ? 'Desafío' : 'Challenge'}
-                    </h4>
-                    <p className="text-grey">{project.challenge[lang]}</p>
+                <h4 className="text-xl font-semibold mb-4 text-berry text-center">
+                  {lang === 'es' ? 'Proceso' : 'Process'}
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Research */}
+                  <div className="bg-grey-dark p-4 rounded-2xl">
+                    <h5 className="text-lg font-semibold text-berry mb-2 flex items-center gap-2">
+                      <span>🔍</span> {lang === 'es' ? 'Investigación' : 'Research'}
+                    </h5>
+                    <p className="text-grey text-sm">{project.research[lang]}</p>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-berry">
-                      {lang === 'es' ? 'Solución' : 'Solution'}
-                    </h4>
-                    <p className="text-grey">{project.solution[lang]}</p>
+                  {/* Iteration */}
+                  <div className="bg-grey-dark p-4 rounded-2xl">
+                    <h5 className="text-lg font-semibold text-berry mb-2 flex items-center gap-2">
+                      <span>🔄</span> {lang === 'es' ? 'Iteración' : 'Iteration'}
+                    </h5>
+                    <p className="text-grey text-sm">{project.iteration[lang]}</p>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-berry">
-                      {lang === 'es' ? 'Resultado' : 'Outcome'}
-                    </h4>
-                    <p className="text-grey">{project.outcome[lang]}</p>
+                  {/* Outcome */}
+                  <div className="bg-grey-dark p-4 rounded-2xl">
+                    <h5 className="text-lg font-semibold text-berry mb-2 flex items-center gap-2">
+                      <span>📈</span> {lang === 'es' ? 'Resultado' : 'Outcome'}
+                    </h5>
+                    <p className="text-grey text-sm">{project.outcome[lang]}</p>
                   </div>
                 </div>
               </motion.div>
