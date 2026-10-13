@@ -24,34 +24,34 @@ type PortfolioProps = {
 export default function Portfolio({ lang }: PortfolioProps) {
   const copy = {
     es: {
-        eyebrow: "Trabajo seleccionado / 02",
-        title: "Productos",
-        titleAccent: "diseñados y desarrollados.",
-        description:
-          "Productos digitales, interfaces y experiencias que he creado desde la estrategia visual hasta la ejecución.",
-        scroll: "Desplázate para explorar",
-        coinsturnCategory: "CRYPTO / REDISEÑO Y PROTOTIPO FUNCIONAL",
-        coinsturnDescription:
-          "Rediseño completo de un proyecto anterior de inversión en criptoactivos. Prototipo funcional 100% diseñado y programado por mí, embebido en este portafolio.",
-        disbursementCategory: "FINTECH / APLICACIÓN WEB",
-        disbursementDescription:
-          "Plataforma financiera empresarial para la gestión de dispersiones, lotes de pagos, transacciones, usuarios y saldos.",
-      },
-      en: {
-        eyebrow: "Selected work / 02",
-        title: "Products",
-        titleAccent: "I've built.",
-        description:
-          "Digital products, interfaces, and experiences designed and developed from strategy to execution.",
-        scroll: "Scroll to explore",
-        coinsturnCategory: "CRYPTO / REDESIGN & FUNCTIONAL PROTOTYPE",
-        coinsturnDescription:
-          "Complete redesign of a past crypto investment project. A fully functional prototype 100% designed and coded by me, embedded directly in this portfolio.",
-        disbursementCategory: "FINTECH / WEB APPLICATION",
-        disbursementDescription:
-          "Enterprise financial platform for managing disbursements, payment batches, transactions, users, and available balances.",
-      },
-    }[lang];
+      eyebrow: "Trabajo seleccionado / 02",
+      title: "Productos",
+      titleAccent: "diseñados y desarrollados.",
+      description:
+        "Productos digitales, interfaces y experiencias que he creado desde la estrategia visual hasta la ejecución.",
+      scroll: "Desplázate para explorar",
+      coinsturnCategory: "CRYPTO / REDISEÑO Y PROTOTIPO FUNCIONAL",
+      coinsturnDescription:
+        "Rediseño completo de un proyecto anterior de inversión en criptoactivos. Prototipo funcional diseñado y programado por mí, integrado en este portafolio.",
+      disbursementCategory: "FINTECH / APLICACIÓN WEB",
+      disbursementDescription:
+        "Plataforma financiera empresarial para gestionar dispersiones, lotes de pagos, transacciones, usuarios y saldos.",
+    },
+    en: {
+      eyebrow: "Selected work / 02",
+      title: "Products",
+      titleAccent: "I've built.",
+      description:
+        "Digital products, interfaces, and experiences designed and developed from strategy to execution.",
+      scroll: "Scroll to explore",
+      coinsturnCategory: "CRYPTO / REDESIGN & FUNCTIONAL PROTOTYPE",
+      coinsturnDescription:
+        "Complete redesign of a previous crypto investment project. A functional prototype designed and coded by me, embedded directly in this portfolio.",
+      disbursementCategory: "FINTECH / WEB APPLICATION",
+      disbursementDescription:
+        "Enterprise financial platform for managing disbursements, payment batches, transactions, users, and balances.",
+    },
+  }[lang];
 
   return (
     <section
@@ -63,7 +63,7 @@ export default function Portfolio({ lang }: PortfolioProps) {
           {copy.eyebrow}
         </div>
 
-        <h2 className="mt-7 max-w-[950px] text-[clamp(4rem,10vw,9rem)] font-medium leading-[0.82] tracking-[-0.08em]">
+        <h2 className="mt-7 max-w-[950px] text-[clamp(4rem,10vw,9rem)]] font-medium leading-[0.82] tracking-[-0.08em]">
           {copy.title}
           <br />
           <span className="text-white/30">{copy.titleAccent}</span>
@@ -92,20 +92,26 @@ export default function Portfolio({ lang }: PortfolioProps) {
           }}
           lang={lang}
         >
-          <Coinsturn lang={lang} />
+          {/* No enviamos lang porque el componente no lo requiere */}
+          <Coinsturn />
         </Project>
 
         <Project
           number="02"
           category={copy.disbursementCategory}
-          title={lang === "es" ? "Portal de dispersiones" : "Disbursement portal"}
+          title={
+            lang === "es"
+              ? "Portal de dispersiones"
+              : "Disbursement portal"
+          }
           description={{
             es: copy.disbursementDescription,
             en: copy.disbursementDescription,
           }}
           lang={lang}
         >
-          <DisbursementPortal lang={lang} />
+          {/* No enviamos lang porque el componente no lo requiere */}
+          <DisbursementPortal />
         </Project>
       </div>
     </section>
@@ -125,6 +131,7 @@ function Project({
 
   useEffect(() => {
     const element = projectRef.current;
+
     if (!element) return;
 
     if (
@@ -157,7 +164,9 @@ function Project({
     <article
       ref={projectRef}
       className={`w-full max-w-[1380px] transform-gpu transition-[opacity,transform] duration-[800ms] ease-out motion-reduce:transition-none ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        isVisible
+          ? "translate-y-0 opacity-100"
+          : "translate-y-10 opacity-0"
       }`}
     >
       <div className="mb-5 flex items-center justify-between gap-4 px-1">
