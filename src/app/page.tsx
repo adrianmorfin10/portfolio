@@ -9,6 +9,7 @@ import Section from './components/section';
 import Tools from './components/tools';
 import Websites from './components/websites';
 import LoadingAnimation from './components/LoadingAnimation';
+import Portfolio from './components/Portfolio';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +26,7 @@ export default function Home() {
           <Section lang={lang} />
           <Tools lang={lang} />
           <Projects lang={lang} />
+          <Portfolio lang={lang} />
           <Websites lang={lang} />
           <Footer lang={lang} />
         </>
