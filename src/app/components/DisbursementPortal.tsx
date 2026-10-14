@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -45,24 +44,24 @@ export default function DisbursementPortal() {
 
   return (
     <div
-    className="disbursement-font relative h-full min-h-0 w-full overflow-hidden bg-[#141414] text-white"
-    style={{
-      backgroundImage:
-        "linear-gradient(130deg, rgba(0,80,246,.24), rgba(20,20,20,.88) 52%, rgba(88,163,255,.12)), url('/backdisp.png')",
-      backgroundPosition: "center",
-      backgroundSize: "cover",
-    }}
-  >
+      className="disbursement-font relative min-h-full w-full overflow-x-hidden bg-[#141414] text-white md:h-full md:min-h-0 md:overflow-hidden"
+      style={{
+        backgroundImage:
+          "linear-gradient(130deg, rgba(0,80,246,.24), rgba(20,20,20,.88) 52%, rgba(88,163,255,.12)), url('/backdisp.png')",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
       <div className="pointer-events-none absolute inset-0 bg-[#141414]/40" />
 
-      <div className="relative z-10 flex h-full min-h-0">
+      <div className="relative z-10 flex min-h-full flex-col md:h-full md:min-h-0 md:flex-row">
         {/* DESKTOP SIDEBAR */}
         <aside
           className={`${
-            collapsed ? "w-[64px]" : "w-[174px] lg:w-[196px]"
+            collapsed ? "md:w-[64px]" : "md:w-[174px] lg:w-[196px]"
           } hidden shrink-0 flex-col border-r border-white/10 bg-[#141414]/85 backdrop-blur-2xl transition-all duration-300 md:flex`}
         >
-          <div className="flex h-[64px] items-center justify-between border-b border-white/10 px-3 lg:px-4">
+          <div className="flex h-[64px] shrink-0 items-center justify-between border-b border-white/10 px-3 lg:px-4">
             {!collapsed && (
               <div>
                 <div className="text-[12px] font-semibold tracking-[-0.04em]">
@@ -115,7 +114,7 @@ export default function DisbursementPortal() {
             ))}
           </nav>
 
-          <div className="border-t border-white/10 p-3">
+          <div className="shrink-0 border-t border-white/10 p-3">
             <div
               className={`flex items-center ${
                 collapsed ? "justify-center" : "gap-2.5"
@@ -140,13 +139,14 @@ export default function DisbursementPortal() {
         </aside>
 
         {/* APP CONTENT */}
-        <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          <header className="flex h-[56px] shrink-0 items-center justify-between border-b border-white/10 bg-[#141414]/70 px-3 backdrop-blur-xl sm:px-4 md:h-[64px] md:px-5">
+        <main className="relative flex min-h-0 min-w-0 flex-1 flex-col md:overflow-hidden">
+          <header className="sticky top-0 z-40 flex h-[56px] shrink-0 items-center justify-between border-b border-white/10 bg-[#141414]/90 px-3 backdrop-blur-xl sm:px-4 md:static md:h-[64px] md:px-5">
             <div className="flex min-w-0 items-center gap-2.5">
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen((value) => !value)}
                 aria-label="Toggle navigation"
+                aria-expanded={mobileMenuOpen}
                 className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 text-white/65 md:hidden"
               >
                 {mobileMenuOpen ? <X size={14} /> : <Menu size={14} />}
@@ -193,7 +193,9 @@ export default function DisbursementPortal() {
             </div>
           )}
 
-          <div className="min-h-0 flex-1 overflow-y-auto p-3 scrollbar-none sm:p-4 md:p-5">
+          {/* MOBILE: DOCUMENT FLOW, WITHOUT INTERNAL SCROLL.
+              DESKTOP: KEEP THE APP CONTENT SCROLLABLE INSIDE THE PORTAL. */}
+          <div className="min-h-0 flex-1 p-3 sm:p-4 md:overflow-y-auto md:p-5">
             {screen === "dashboard" && (
               <Dashboard
                 onUpload={() => navigate("upload")}
@@ -384,9 +386,21 @@ function Dashboard({
           detail="Operations waiting for approval."
         >
           <div className="space-y-2.5">
-            <Pending name="Batch_07032026.csv" amount="$12,430.00" onReview={onUpload} />
-            <Pending name="Batch_06032026.csv" amount="$7,660.00" onReview={onUpload} />
-            <Pending name="Batch_05032026.csv" amount="$4,920.00" onReview={onUpload} />
+            <Pending
+              name="Batch_07032026.csv"
+              amount="$12,430.00"
+              onReview={onUpload}
+            />
+            <Pending
+              name="Batch_06032026.csv"
+              amount="$7,660.00"
+              onReview={onUpload}
+            />
+            <Pending
+              name="Batch_05032026.csv"
+              amount="$4,920.00"
+              onReview={onUpload}
+            />
           </div>
         </Panel>
       </div>
@@ -499,7 +513,7 @@ function TransactionsScreen() {
   ];
 
   return (
-    <div>
+    <div className="min-w-0">
       <Heading detail="Review all disbursement transactions.">
         Transactions
       </Heading>
@@ -520,7 +534,9 @@ function TransactionsScreen() {
             <span className="text-[#58A3FF]">{reference}</span>
             <span className="text-white/75">{recipient}</span>
             <span>{amount}</span>
-            <span><Status value={status} /></span>
+            <span>
+              <Status value={status} />
+            </span>
           </div>
         ))}
       </div>
