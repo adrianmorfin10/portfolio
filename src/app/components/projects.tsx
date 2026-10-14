@@ -229,17 +229,19 @@ export default function Projects({ lang }: ProjectsProps) {
             {/* Grid original de cuatro columnas */}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
               {/* Video: contenedor redondeado y dimensiones originales */}
-              <div className="hidden cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-[#090909] transition-colors duration-300 hover:border-white/25 md:col-span-2 md:block">
-                <video
-                  src={project.media.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls={false}
-                  className="h-64 w-full object-cover"
-                />
-              </div>
+              <div className="group overflow-hidden rounded-3xl border border-white/10 bg-[#090909] transition-colors duration-300 hover:border-white/25 md:col-span-2">
+  <video
+    src={project.media.video}
+    autoPlay
+    loop
+    muted
+    playsInline
+    controls={false}
+    preload="metadata"
+    aria-label={`${project.title} - preview`}
+    className="block h-auto max-h-[420px] w-full object-contain md:max-h-none"
+  />
+</div>
 
               {/* Descripción: texto libre, sin tarjeta */}
               <div className="p-6 md:col-span-2">
