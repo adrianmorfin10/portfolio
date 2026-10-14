@@ -58,28 +58,34 @@ export default function Portfolio({ lang }: PortfolioProps) {
       id="portfolio"
       className="relative overflow-x-clip bg-[#050505] text-white"
     >
-      <header className="mx-auto max-w-[1500px] px-5 pb-16 pt-32 sm:px-8 md:px-10 md:pb-24 md:pt-44">
-        <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30">
-          {copy.eyebrow}
-        </div>
+      
+<header className="mx-auto max-w-[1500px] px-5 pb-20 pt-32 sm:px-8 md:px-10 md:pb-28 md:pt-40 lg:pt-44">
+  <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30">
+    {copy.eyebrow}
+  </div>
 
-        <h2 className="mt-7 max-w-[950px] text-[clamp(4rem,10vw,9rem)]] font-medium leading-[0.82] tracking-[-0.08em]">
-          {copy.title}
-          <br />
-          <span className="text-white/30">{copy.titleAccent}</span>
-        </h2>
+  <h2 className="mt-8 max-w-[1250px] text-[clamp(4.2rem,11.5vw,11.5rem)] font-black leading-[0.78] tracking-[-0.085em]">
+    {copy.title}
+    <br />
+    <span className="text-white/30 transition-colors duration-300 hover:text-white/70">
+      {copy.titleAccent}
+    </span>
+  </h2>
 
-        <p className="mt-10 max-w-xl text-sm leading-7 text-white/40 md:text-base">
-          {copy.description}
-        </p>
+  <div className="mt-10 flex flex-col gap-10 md:mt-14 md:flex-row md:items-end md:justify-between">
+    <p className="max-w-xl text-sm leading-7 text-white/45 md:text-base md:leading-8">
+      {copy.description}
+    </p>
 
-        <div className="mt-12 flex items-center gap-3">
-          <div className="h-px w-8 bg-white/30" />
-          <span className="font-mono text-[8px] uppercase tracking-[0.22em] text-white/30">
-            {copy.scroll}
-          </span>
-        </div>
-      </header>
+    <div className="flex shrink-0 items-center gap-3 pb-1">
+      <div className="h-px w-8 bg-white/30" />
+      <span className="font-mono text-[8px] uppercase tracking-[0.22em] text-white/30">
+        {copy.scroll}
+      </span>
+    </div>
+  </div>
+</header>
+
 
       <div className="mx-auto flex w-full max-w-[1500px] flex-col items-center gap-20 px-4 pb-28 sm:gap-24 sm:px-6 md:gap-32 md:px-10 md:pb-40">
         <Project

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -5,7 +6,7 @@ import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 
 interface WebsitesProps {
-  lang: 'es' | 'en';
+  lang: "es" | "en";
 }
 
 const websitesData = {
@@ -16,7 +17,7 @@ const websitesData = {
       preview: "/qcs.png",
       demo: "/qcs.mp4",
       description: "E-commerce para señalética industrial",
-      features: ["Sitio Web", "E-commerce", "Animación"]
+      features: ["Sitio Web", "E-commerce", "Animación"],
     },
     {
       title: "Luhn AI",
@@ -24,7 +25,7 @@ const websitesData = {
       preview: "/luhn.png",
       demo: "/luhn.mp4",
       description: "Plataforma de IA financiera",
-      features: ["Colaborativo"]
+      features: ["Colaborativo"],
     },
     {
       title: "Vértice",
@@ -33,7 +34,7 @@ const websitesData = {
       demo: "/vertice_full.mp4",
       demoCompressed: "/vertice_comp.mp4",
       description: "Sitio web para empresa de minería",
-      features: ["Branding", "Sitio Web", "UI/UX", "Optimización"]
+      features: ["Branding", "Sitio Web", "UI/UX", "Optimización"],
     },
     {
       title: "Duo Talent",
@@ -41,7 +42,7 @@ const websitesData = {
       preview: "/duo.png",
       demo: "/duo.mp4",
       description: "Agencia de talento digital",
-      features: ["Branding", "Sitio Web", "UI/UX"]
+      features: ["Branding", "Sitio Web", "UI/UX"],
     },
     {
       title: "KOBA",
@@ -49,8 +50,8 @@ const websitesData = {
       preview: "/koba.png",
       demo: "/koba.mp4",
       description: "Marca de ropa Fitness",
-      features: ["Branding", "Sitio Web", "UI/UX"]
-    }
+      features: ["Branding", "Sitio Web", "UI/UX"],
+    },
   ],
   en: [
     {
@@ -59,7 +60,7 @@ const websitesData = {
       preview: "/qcs.png",
       demo: "/qcs.mp4",
       description: "E-commerce for industrial signage",
-      features: ["Website", "E-commerce", "Animation"]
+      features: ["Website", "E-commerce", "Animation"],
     },
     {
       title: "Luhn AI",
@@ -67,7 +68,7 @@ const websitesData = {
       preview: "/luhn.png",
       demo: "/luhn.mp4",
       description: "Financial AI platform",
-      features: ["Collaborative"]
+      features: ["Collaborative"],
     },
     {
       title: "Vértice",
@@ -76,7 +77,7 @@ const websitesData = {
       demo: "/vertice_full.mp4",
       demoCompressed: "/vertice_comp.mp4",
       description: "Website for mining company",
-      features: ["Branding", "Website", "UI/UX", "Optimization"]
+      features: ["Branding", "Website", "UI/UX", "Optimization"],
     },
     {
       title: "Duo Talent",
@@ -84,7 +85,7 @@ const websitesData = {
       preview: "/duo.png",
       demo: "/duo.mp4",
       description: "Digital talent agency",
-      features: ["Branding", "Website", "UI/UX"]
+      features: ["Branding", "Website", "UI/UX"],
     },
     {
       title: "KOBA",
@@ -92,106 +93,155 @@ const websitesData = {
       preview: "/koba.png",
       demo: "/koba.mp4",
       description: "Fitness clothing brand",
-      features: ["Branding", "Website", "UI/UX"]
-    }
-  ]
+      features: ["Branding", "Website", "UI/UX"],
+    },
+  ],
 };
 
 export default function Websites({ lang }: WebsitesProps) {
   const websites = websitesData[lang];
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [loadedVideos, setLoadedVideos] = useState<{ [key: number]: boolean }>({});
+  const [loadedVideos, setLoadedVideos] = useState<{
+    [key: number]: boolean;
+  }>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
+  const videoRefs = useRef<{
+    [key: number]: HTMLVideoElement | null;
+  }>({});
 
   const handleVideoLoad = useCallback((index: number) => {
-    setLoadedVideos(prev => ({ ...prev, [index]: true }));
+    setLoadedVideos((prev) => ({ ...prev, [index]: true }));
   }, []);
 
-  const handleCardHover = useCallback((index: number) => {
-    if (window.innerWidth <= 768) return;
-    setHoveredIndex(index);
-    
-    if (index === 2 && !loadedVideos[2]) {
-      const fullVideo = videoRefs.current[2];
-      if (fullVideo) fullVideo.load();
-    }
+  const handleCardHover = useCallback(
+    (index: number) => {
+      if (window.innerWidth <= 768) return;
+      setHoveredIndex(index);
 
-    if (!containerRef.current || !cardsRef.current[index]) return;
+      if (index === 2 && !loadedVideos[2]) {
+        const fullVideo = videoRefs.current[2];
+        if (fullVideo) fullVideo.load();
+      }
 
-    const container = containerRef.current;
-    const card = cardsRef.current[index];
-    if (!card) return;
+      if (!containerRef.current || !cardsRef.current[index]) return;
 
-    const containerRect = container.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    const cardLeft = cardRect.left - containerRect.left;
-    const cardRight = cardRect.right - containerRect.left;
-    const containerWidth = containerRect.width;
-    let targetScroll = container.scrollLeft;
-    
-    if (cardRight > containerWidth) {
-      targetScroll = container.scrollLeft + (cardRight - containerWidth) + 24;
-    } else if (cardLeft < 0) {
-      targetScroll = container.scrollLeft + cardLeft - 24;
-    } else if (cardRect.width > containerWidth) {
-      targetScroll = cardLeft - ((containerWidth - cardRect.width) / 2);
-    }
+      const container = containerRef.current;
+      const card = cardsRef.current[index];
+      if (!card) return;
 
-    container.scrollTo({ left: targetScroll, behavior: 'smooth' });
-  }, [loadedVideos]);
+      const containerRect = container.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const cardLeft = cardRect.left - containerRect.left;
+      const cardRight = cardRect.right - containerRect.left;
+      const containerWidth = containerRect.width;
+      let targetScroll = container.scrollLeft;
 
-  const handleContainerMouseLeave = useCallback(() => setHoveredIndex(null), []);
-  const setCardRef = useCallback((index: number) => (el: HTMLDivElement | null) => { cardsRef.current[index] = el; }, []);
-  const setVideoRef = useCallback((index: number) => (el: HTMLVideoElement | null) => { videoRefs.current[index] = el; }, []);
+      if (cardRight > containerWidth) {
+        targetScroll =
+          container.scrollLeft + (cardRight - containerWidth) + 24;
+      } else if (cardLeft < 0) {
+        targetScroll = container.scrollLeft + cardLeft - 24;
+      } else if (cardRect.width > containerWidth) {
+        targetScroll = cardLeft - (containerWidth - cardRect.width) / 2;
+      }
+
+      container.scrollTo({ left: targetScroll, behavior: "smooth" });
+    },
+    [loadedVideos]
+  );
+
+  const handleContainerMouseLeave = useCallback(
+    () => setHoveredIndex(null),
+    []
+  );
+
+  const setCardRef = useCallback(
+    (index: number) => (el: HTMLDivElement | null) => {
+      cardsRef.current[index] = el;
+    },
+    []
+  );
+
+  const setVideoRef = useCallback(
+    (index: number) => (el: HTMLVideoElement | null) => {
+      videoRefs.current[index] = el;
+    },
+    []
+  );
 
   return (
-    <section className="relative bg-[#000000] py-20 overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-white mb-4">
-            {lang === 'es' ? 'Sitios Web Realizados' : 'Websites Made'}
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            {lang === 'es' 
-              ? 'Experiencias digitales que combinan diseño y funcionalidad'
-              : 'Digital experiences combining design and functionality'}
+    <section
+      className="relative overflow-hidden bg-[#050505] py-24 text-white md:py-36"
+      style={{
+        fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+      }}
+    >
+      <div className="container relative z-10 mx-auto px-4">
+        {/* Encabezado editorial */}
+        <div className="mb-16 text-left md:mb-20">
+          <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30">
+            {lang === "es"
+              ? "Trabajo seleccionado / 03"
+              : "Selected work / 03"}
           </p>
-        </motion.div>
 
-        <div 
+          <h2 className="mt-8 text-[clamp(3.8rem,10vw,10rem)] font-black leading-[0.8] tracking-[-0.085em]">
+            {lang === "es" ? "Sitios web" : "Websites"}
+            <br />
+            <span className="text-white/30 transition-colors duration-300 hover:text-white/75">
+              {lang === "es" ? "realizados." : "I've built."}
+            </span>
+          </h2>
+
+          <p className="mt-10 max-w-xl text-sm leading-7 text-white/45 md:mt-14 md:text-base md:leading-8">
+            {lang === "es"
+              ? "Experiencias digitales que combinan diseño, identidad visual y funcionalidad."
+              : "Digital experiences combining design, visual identity, and functionality."}
+          </p>
+        </div>
+
+        <div
           ref={containerRef}
-          className="relative pb-8 -mx-4 overflow-x-auto overflow-y-hidden scroll-smooth"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="relative -mx-4 overflow-x-auto overflow-y-hidden pb-8 scroll-smooth"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
           onMouseLeave={handleContainerMouseLeave}
         >
           <style jsx>{`
-            .overflow-x-auto::-webkit-scrollbar { display: none; }
+            .overflow-x-auto::-webkit-scrollbar {
+              display: none;
+            }
           `}</style>
-          
-          <div className="flex px-4 space-x-6 w-max">
+
+          <div className="flex w-max space-x-6 px-4">
             {websites.map((site, index) => (
               <motion.div
                 key={index}
                 ref={setCardRef(index)}
-                className="flex-shrink-0 relative"
+                className="relative flex-shrink-0"
                 initial={{ width: 300 }}
                 animate={{
-                  width: hoveredIndex === index && window.innerWidth > 768 ? 600 : 300
+                  width:
+                    hoveredIndex === index && window.innerWidth > 768
+                      ? 600
+                      : 300,
                 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                }}
                 onHoverStart={() => handleCardHover(index)}
-                onHoverEnd={() => window.innerWidth > 768 && setHoveredIndex(null)}
+                onHoverEnd={() =>
+                  window.innerWidth > 768 && setHoveredIndex(null)
+                }
               >
-                <div className="h-full bg-[#000000] rounded-2xl overflow-hidden border border-gray-800 flex flex-col">
-                  <div className="relative h-40 overflow-hidden">
+                <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#090909] transition-colors duration-300 hover:border-white/25">
+                  {/* Preview: conserva su altura original */}
+                  <div className="relative h-40 overflow-hidden bg-[#111111]">
                     <Image
                       src={site.preview}
                       alt={site.title}
@@ -200,14 +250,23 @@ export default function Websites({ lang }: WebsitesProps) {
                       priority={index < 2}
                     />
                   </div>
-                  
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-2xl font-bold text-white mb-2">{site.title}</h3>
-                    <p className="text-gray-300 mb-4">{site.description}</p>
-                    
-                    <div className="flex flex-wrap gap-2 mt-auto">
+
+                  {/* Información: sin cambios de estructura */}
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="mb-2 text-2xl font-black tracking-[-0.05em] text-white">
+                      {site.title}
+                    </h3>
+
+                    <p className="mb-4 text-sm leading-relaxed text-white/45 transition-colors duration-300 hover:text-white/80">
+                      {site.description}
+                    </p>
+
+                    <div className="mt-auto flex flex-wrap gap-2">
                       {site.features.map((feature, i) => (
-                        <span key={i} className="px-3 py-1 bg-gray-500/20 text-white rounded-full text-sm">
+                        <span
+                          key={i}
+                          className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/55 transition-colors duration-300 hover:border-white/35 hover:text-white"
+                        >
                           {feature}
                         </span>
                       ))}
@@ -217,38 +276,62 @@ export default function Websites({ lang }: WebsitesProps) {
                       href={site.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="md:hidden mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition"
+                      className="mt-4 flex items-center justify-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-black md:hidden"
                     >
-                      <span>{lang === 'es' ? 'Visitar sitio' : 'Visit site'}</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      <span>
+                        {lang === "es" ? "Visitar sitio" : "Visit site"}
+                      </span>
+
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M7 17 17 7M7 7h10v10" />
                       </svg>
                     </a>
                   </div>
 
+                  {/* Demo al pasar el cursor: se conserva el comportamiento */}
                   {hoveredIndex === index && (
-                    <motion.div 
+                    <motion.div
                       className="absolute inset-0 hidden md:block"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                     >
-                      {site.demoCompressed ? (
+                      {"demoCompressed" in site && site.demoCompressed ? (
                         <>
                           <video
                             key={`${index}-compressed`}
-                            autoPlay loop muted playsInline
-                            className="w-full h-full object-cover"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="h-full w-full object-cover"
                             preload="none"
                             onLoadedData={() => handleVideoLoad(index)}
                           >
-                            <source src={site.demoCompressed} type="video/mp4" />
+                            <source
+                              src={site.demoCompressed}
+                              type="video/mp4"
+                            />
                           </video>
+
                           {loadedVideos[index] && (
                             <video
                               ref={setVideoRef(index)}
                               key={`${index}-full`}
-                              autoPlay loop muted playsInline
-                              className="w-full h-full object-cover absolute inset-0"
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="absolute inset-0 h-full w-full object-cover"
                               preload="none"
                             >
                               <source src={site.demo} type="video/mp4" />
@@ -256,26 +339,57 @@ export default function Websites({ lang }: WebsitesProps) {
                           )}
                         </>
                       ) : (
-                        <video autoPlay loop muted playsInline className="w-full h-full object-cover" preload="none">
+                        <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="h-full w-full object-cover"
+                          preload="none"
+                        >
                           <source src={site.demo} type="video/mp4" />
                         </video>
                       )}
-                      
+
                       <div className="absolute bottom-4 right-4">
                         <motion.a
                           href={site.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors"
-                          whileHover={{ x: 4, transition: { type: "spring", stiffness: 500 } }}
+                          className="flex items-center gap-2 rounded-full bg-[#f5f4ef] px-5 py-3 text-sm font-medium text-black transition-colors hover:bg-white"
+                          whileHover={{
+                            x: 4,
+                            transition: {
+                              type: "spring",
+                              stiffness: 500,
+                            },
+                          }}
                         >
-                          <span>{lang === 'es' ? 'Ver demo' : 'View demo'}</span>
+                          <span>
+                            {lang === "es" ? "Ver demo" : "View demo"}
+                          </span>
+
                           <motion.svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             initial={{ rotate: 0 }}
-                            whileHover={{ rotate: -45, transition: { type: "spring", stiffness: 500, damping: 15 } }}
+                            whileHover={{
+                              rotate: -45,
+                              transition: {
+                                type: "spring",
+                                stiffness: 500,
+                                damping: 15,
+                              },
+                            }}
                           >
-                            <path d="M5 12h14M12 19l7-7-7-7"/>
+                            <path d="M7 17 17 7M7 7h10v10" />
                           </motion.svg>
                         </motion.a>
                       </div>
@@ -287,16 +401,9 @@ export default function Websites({ lang }: WebsitesProps) {
           </div>
         </div>
 
-        {/* CTA WhatsApp */}
-        <div className="text-center mt-12">
-        {/* <a
-            href="https://wa.me/525532059514?text=Requiero%20cotización%20para%20mi%20sitio%20web"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors whitespace-nowrap"
-          >
-            {lang === 'es' ? '¡Quiero mi sitio web!' : 'I want my website!'}
-          </a>*/}
+        {/* CTA WhatsApp: se conserva sin mostrar */}
+        <div className="mt-12 text-center">
+          {/* CTA original desactivado */}
         </div>
       </div>
     </section>

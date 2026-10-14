@@ -130,10 +130,10 @@ export default function Coinsturn() {
   const simulationValue = investment * Math.pow(1.08, simulationMonths);
 
   return (
-    <div className="relative h-[560px] overflow-hidden bg-[#050505] text-white md:h-[720px]" style={{ fontFamily: "'Albert Sans', Arial, sans-serif" }}>
+    <div className="relative min-h-[560px] overflow-visible bg-[#050505] text-white md:h-[720px] md:overflow-hidden" style={{ fontFamily: "'Albert Sans', Arial, sans-serif" }}>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_0%,rgba(202,255,0,0.09),transparent_38%),radial-gradient(ellipse_at_0%_100%,rgba(255,255,255,0.035),transparent_36%)]" />
 
-      <div className="relative flex h-full">
+      <div className="relative flex flex-col md:h-full md:flex-row">
         {/* SIDEBAR */}
         <aside className="relative z-10 hidden w-[174px] shrink-0 flex-col border-r border-white/[0.07] bg-[#080808]/90 px-3 py-5 md:flex lg:w-[190px]">
           <div className="mb-8 flex h-9 items-center px-2">
@@ -222,7 +222,7 @@ export default function Coinsturn() {
             ))}
           </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto px-3 py-4 scrollbar-none sm:px-5 md:px-7 md:py-6">
+          <div className="min-h-0 flex-none overflow-visible px-3 py-4 scrollbar-none sm:px-5 md:flex-1 md:overflow-y-auto md:px-7 md:py-6">
             {activeView === "Home" && (
               <CoinsturnHome
                 markets={markets}
@@ -419,7 +419,7 @@ function CoinsturnLineChart() {
 
 function CoinsturnMetric({ label, value, detail, accent = false }: { label: string; value: string; detail: string; accent?: boolean }) {
   return (
-    <div className={`rounded-[18px] border p-4 ${accent ? "!border-[#caff00] !bg-[#caff00] !text-black [&_*]:!text-black" : "border-white/[0.08] bg-white/[0.025] text-white"}`}>
+    <div className={`rounded-[18px] border p-4 ${accent ? "border-[#caff00]/15 bg-[#caff00]/[0.055]" : "border-white/[0.08] bg-white/[0.025]"}`}>
       <div className="flex items-center justify-between gap-2"><span className="text-[8px] text-white/40">{label}</span><ArrowUpRight size={11} className={accent ? "text-[#caff00]" : "text-white/20"} /></div>
       <div className="mt-4 break-words text-[clamp(0.92rem,2vw,1.2rem)] font-medium tracking-[-0.05em]">{value}</div>
       <div className="mt-2 text-[7px] leading-4 text-white/25">{detail}</div>
@@ -476,7 +476,7 @@ function CoinsturnPortfolio() {
   return (
     <div>
       <CoinsturnPageTitle eyebrow="Asset allocation" title="Your portfolio." description="A consolidated view of the crypto assets allocated across your holdings and strategies." />
-      <div className=" mb-5 grid grid-cols-2 gap-3 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
         <CoinsturnMetric label="Total allocation" value="$791,766" detail="Sample asset value" accent />
         <CoinsturnMetric label="Assets" value="12" detail="Tracked in this account" />
         <div className="col-span-2 md:col-span-1"><CoinsturnMetric label="Largest position" value="USDT · 81.8%" detail="Share of shown assets" /></div>
